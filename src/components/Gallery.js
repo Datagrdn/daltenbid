@@ -4,7 +4,14 @@ import NftTable from "./NftTable";
 
 class Gallery extends Component {
   render() {
-    return <NftTable nftData={nftData} />;
+    return (
+      <div className="Main">
+        <div className="container-fluid mt-5">
+          <img src="https://dalten.org/images/dalten-sigil.svg" />
+          <NftTable nftData={nftData} />
+        </div>
+      </div>
+    );
   }
 }
 
