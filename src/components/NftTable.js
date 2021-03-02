@@ -5,6 +5,16 @@ import Bid from "./Bid";
 export const NftTable = (props) => {
   const { nftData } = props;
 
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="row">
       <main role="main" className="col-lg-12 d-flex text-center">
@@ -73,10 +83,18 @@ export const NftTable = (props) => {
                       color: "#8B8B8B",
                       width: "200px",
                     }}
-                    onClick={(e) => console.log("Bid")}
+                    onClick={showModal}
                   >
                     <b>Bid</b>
                   </button>
+                  <Modal show={isOpen} onHide={hideModal}>
+                    <Modal.Body>
+                      <Bid />
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <button onClick={hideModal}>Bid</button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
               );
             })}
