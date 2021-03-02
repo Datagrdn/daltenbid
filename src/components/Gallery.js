@@ -79,6 +79,18 @@ class Gallery extends Component {
                             </tr>
                           </tbody>
                         </table>
+                        <button
+                          type="Success"
+                          className="btn btn-block"
+                          style={{
+                            border: "1px ridge #8B8B8B",
+                            color: "#8B8B8B",
+                            width: "200px",
+                          }}
+                          onClick={(e) => console.log("This will be a popup")}
+                        >
+                          <b>Bid</b>
+                        </button>
                       </div>
                     );
                   })}
