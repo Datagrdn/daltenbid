@@ -13,12 +13,21 @@ class Gallery extends Component {
                   className="row justify-content-around"
                   style={{ width: "1000px", fontSize: "13px" }}
                 >
-                  {nftData.map((nft) => (
-                    <div key={nft.id}>
-                      <img src={nft.image} height="100" width="100" />
-                      <p>{nft.chain}</p>
-                    </div>
-                  ))}
+                  {nftData.map((nft) => {
+                    return (
+                      <div className="p-3" key={nft.id}>
+                        <img
+                          src={nft.image}
+                          style={{
+                            border: "1mm ridge",
+                            width: "200px",
+                            height: "300px",
+                          }}
+                        />
+                        <p>{nft.chain}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </main>
