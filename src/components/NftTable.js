@@ -1,19 +1,10 @@
-import React, { Component } from "react";
-import Modal from "react-bootstrap/Modal";
+import React, { Component, useState } from "react";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
 export const NftTable = (props) => {
   const { nftData } = props;
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const showModal = () => {
-    setIsOpen(true);
-  };
-
-  const hideModal = () => {
-    setIsOpen(false);
-  };
 
   return (
     <div className="row">
@@ -75,26 +66,26 @@ export const NftTable = (props) => {
                       </tr>
                     </tbody>
                   </table>
-                  <button
-                    type="Success"
-                    className="btn btn-block"
-                    style={{
-                      border: "1px ridge #8B8B8B",
-                      color: "#8B8B8B",
-                      width: "200px",
-                    }}
-                    onClick={showModal}
+                  <Bid />
+                  {/* <Popup
+                    trigger={
+                      <button
+                        type="Success"
+                        className="btn btn-block"
+                        style={{
+                          border: "1px ridge #8B8B8B",
+                          color: "#8B8B8B",
+                          width: "200px",
+                        }}
+                      >
+                        <b>Bid</b>
+                      </button>
+                    }
+                    position="top left"
+                    className="my-popup"
                   >
-                    <b>Bid</b>
-                  </button>
-                  <Modal show={isOpen} onHide={hideModal}>
-                    <Modal.Body>
-                      <Bid />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <button onClick={hideModal}>Bid</button>
-                    </Modal.Footer>
-                  </Modal>
+                    <Bid />
+                  </Popup> */}
                 </div>
               );
             })}
