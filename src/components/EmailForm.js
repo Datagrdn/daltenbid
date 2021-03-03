@@ -9,22 +9,28 @@ export default function EmailForm() {
     console.log(email);
   };
 
+  const showForm = (email) => {
+    return (
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <label>E-mail</label>
+        <br />
+        <input
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+        <input className="submitButton" type="submit" value="Submit" />
+      </form>
+    );
+  };
+
   return !localStorage.getItem("emailInLocalStorage") ? (
-    <form
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <label>E-mail</label>
-      <br />
-      <input
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br />
-      <input className="submitButton" type="submit" value="Submit" />
-    </form>
+    showForm(email)
   ) : (
     <p>
       {localStorage.getItem("emailInLocalStorage")}
