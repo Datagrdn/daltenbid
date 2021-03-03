@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 
 export default function EmailForm() {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setEmail(e.target.value);
     localStorage.setItem("emailInLocalStorage", [email]);
     console.log(email);
+  };
+
+  const clearStorage = () => {
+    setEmail("");
+    localStorage.setItem("emailInLocalStorage", [email]);
   };
 
   const showForm = (email) => {
@@ -34,9 +40,7 @@ export default function EmailForm() {
   ) : (
     <p>
       {localStorage.getItem("emailInLocalStorage")}
-      <p onClick={() => localStorage.setItem("emailInLocalStorage", "")}>
-        [change]
-      </p>
+      <p onClick={() => clearStorage()}>[change]</p>
     </p>
   );
 }
