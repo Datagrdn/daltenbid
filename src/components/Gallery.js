@@ -12,6 +12,7 @@ const Gallery = () => {
   }, [value]);
 
   const onChange = (event) => setValue(event.target.value);
+  const resetEmail = (event) => localStorage.setItem("emailInLocalStorage", "");
 
   return (
     <div className="Main">
@@ -19,8 +20,13 @@ const Gallery = () => {
         <img src="https://dalten.org/images/dalten-sigil.svg" />
         <br />
         <br />
-        <input value={value} type="text" onChange={onChange} />
-        <p>{value}</p>
+        {!localStorage.getItem("emailInLocalStorage") ? (
+          <input value={value} type="text" onChange={onChange} />
+        ) : (
+          <p>
+            {value} <p onClick={resetEmail}>[change]</p>
+          </p>
+        )}
         <NftTable nftData={nftData} />
       </div>
     </div>
