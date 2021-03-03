@@ -67,25 +67,6 @@ export const NftTable = (props) => {
                     </tbody>
                   </table>
                   <Bid />
-                  {/* <Popup
-                    trigger={
-                      <button
-                        type="Success"
-                        className="btn btn-block"
-                        style={{
-                          border: "1px ridge #8B8B8B",
-                          color: "#8B8B8B",
-                          width: "200px",
-                        }}
-                      >
-                        <b>Bid</b>
-                      </button>
-                    }
-                    position="top left"
-                    className="my-popup"
-                  >
-                    <Bid />
-                  </Popup> */}
                 </div>
               );
             })}
