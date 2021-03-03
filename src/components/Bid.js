@@ -12,7 +12,7 @@ export default class Bid extends Component {
               <table border="0" style={{ width: "100%" }}>
                 <tr>
                   <th className="text-left" style={{ color: "#8B8B8B" }}>
-                    Bid Amount:{" "}
+                    <small>Bid Amount: </small>
                   </th>
                   <th style={{ color: "#000000" }}>
                     {" "}
