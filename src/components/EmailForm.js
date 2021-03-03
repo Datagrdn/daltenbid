@@ -7,15 +7,16 @@ export default function EmailForm() {
     e.preventDefault();
     setEmail(e.target.value);
     localStorage.setItem("emailInLocalStorage", [email]);
-    console.log(email);
   };
 
   const clearStorage = () => {
-    setEmail("");
+    console.log("clear storage");
+    setEmail("E-mail");
     localStorage.setItem("emailInLocalStorage", [email]);
   };
 
   const showForm = (email) => {
+    console.log("from emailform", localStorage);
     return (
       <form
         onSubmit={(e) => {

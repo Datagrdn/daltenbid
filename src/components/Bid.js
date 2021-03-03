@@ -53,6 +53,7 @@ const showForm = () => {
 
 export default class Bid extends Component {
   render() {
+    console.log("from bid", localStorage);
     return (
       <Popup trigger={<button>Bid</button>} position="top left">
         {localStorage.getItem("emailInLocalStorage").includes("@") ? (
