@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { nftData } from "./nftData";
 import { NftTable } from "./NftTable";
 import EmailForm from "./EmailForm";

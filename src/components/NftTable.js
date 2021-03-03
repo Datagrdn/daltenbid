@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-import Popup from "reactjs-popup";
+import React from "react";
 import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
