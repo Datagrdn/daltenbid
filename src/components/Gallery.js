@@ -1,9 +1,9 @@
 import React from "react";
 import { nftData } from "./nftData";
-import { NftTable } from "./NftTable";
+import NftTable from "./NftTable";
 import EmailForm from "./EmailForm";
 
-const Gallery = () => {
+function Gallery() {
   return (
     <div className="Main">
       <div className="container-fluid mt-5">
@@ -15,6 +15,6 @@ const Gallery = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Gallery;

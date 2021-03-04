@@ -2,7 +2,7 @@ import React from "react";
 import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
-export const NftTable = (props) => {
+export default function NftTable(props) {
   const { nftData } = props;
 
   return (
@@ -74,4 +74,4 @@ export const NftTable = (props) => {
       </main>
     </div>
   );
-};
+}

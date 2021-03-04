@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AppContext from "../context";
 
 export default function EmailForm() {
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const emailContext = useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEmail(e.target.value);
-    localStorage.setItem("emailInLocalStorage", [email]);
+    emailContext.setEmail(e.target.value);
+    localStorage.setItem("emailInLocalStorage", [emailContext.email]);
   };
 
   const clearStorage = () => {
     console.log("clear storage");
-    setEmail("E-mail");
-    localStorage.setItem("emailInLocalStorage", [email]);
+    emailContext.setEmail("test@test.com");
+    localStorage.setItem("emailInLocalStorage", [emailContext.email]);
   };
 
   const showForm = (email) => {
@@ -27,8 +29,8 @@ export default function EmailForm() {
         <br />
         <input
           name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={emailContext.email}
+          onChange={(e) => emailContext.setEmail(e.target.value)}
         />
         <br />
         <input className="submitButton" type="submit" value="Submit" />
@@ -37,7 +39,7 @@ export default function EmailForm() {
   };
 
   return !localStorage.getItem("emailInLocalStorage") ? (
-    showForm(email)
+    showForm(emailContext.email)
   ) : (
     <p>
       {localStorage.getItem("emailInLocalStorage")}

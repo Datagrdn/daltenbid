@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Gallery from "./Gallery";
 
-export default function App() {
-  console.log("from app", localStorage);
+function App() {
   return <Gallery />;
 }
+
+export default App;
