@@ -4,6 +4,8 @@ import AppContext from ".";
 const ContextProvider = ({ children }) => {
   const [email, setEmail] = useState(
     localStorage.getItem("emailInLocalStorage")
+      ? localStorage.getItem("emailInLocalStorage")
+      : "E-mail"
   );
   const context = {
     setEmail,
