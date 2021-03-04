@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Popup from "reactjs-popup";
+import AppContext from "../context";
 import "reactjs-popup/dist/index.css";
 
-const showForm = () => {
+const ShowForm = (email) => {
   return (close) => (
     <div>
       <div className="bid">
@@ -11,7 +12,7 @@ const showForm = () => {
             <th>
               <center>
                 <small>
-                  <b>{localStorage.getItem("emailInLocalStorage")}</b>
+                  <b>{email}</b>
                 </small>
               </center>
             </th>
@@ -52,14 +53,11 @@ const showForm = () => {
 };
 
 export default function Bid() {
-  console.log("from bid", localStorage);
+  const { email } = useContext(AppContext);
+
   return (
     <Popup trigger={<button>Bid</button>} position="top left">
-      {localStorage.getItem("emailInLocalStorage").includes("@") ? (
-        showForm()
-      ) : (
-        <p>Please Enter E-mail</p>
-      )}
+      {email.includes("@") ? ShowForm(email) : <p>Please Enter E-mail</p>}
     </Popup>
   );
 }

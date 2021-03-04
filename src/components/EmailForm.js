@@ -8,6 +8,7 @@ export default function EmailForm() {
 
   useEffect(() => {
     localStorage.setItem("emailInLocalStorage", email);
+    console.log("email:", email);
   }, [email]);
 
   const handleChange = (e) => {
@@ -44,7 +45,7 @@ export default function EmailForm() {
   ) : (
     <p>
       {localStorage.getItem("emailInLocalStorage")}
-      <p onClick={() => clearStorage}>[change]</p>
+      <p onClick={() => clearStorage()}>[change]</p>
     </p>
   );
 }
