@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import AppContext from ".";
 
 const ContextProvider = ({ children }) => {
-  const [email, setEmail] = useState("E-mail");
+  const [email, setEmail] = useState(
+    localStorage.getItem("emailInLocalStorage")
+  );
   const context = {
     setEmail,
     email,
