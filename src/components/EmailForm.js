@@ -4,12 +4,10 @@ import AppContext from "../context";
 export default function EmailForm() {
   const { email, setEmail } = useContext(AppContext);
   const [formText, setFormText] = useState("");
-  // const emailContext = useContext(AppContext);
 
-  useEffect(() => {
-    localStorage.setItem("emailInLocalStorage", email);
-    console.log("email:", email);
-  }, [email]);
+  // useEffect(() => {
+  //   localStorage.setItem("emailInLocalStorage", email);
+  // }, [email]);
 
   const handleChange = (e) => {
     setFormText(e.target.value);
@@ -18,21 +16,21 @@ export default function EmailForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEmail(formText);
+    localStorage.setItem("emailInLocalStorage", formText);
   };
 
   const clearStorage = () => {
     console.log("clear storage");
-    // setEmail("test@test.com");
+    setEmail("");
     localStorage.setItem("emailInLocalStorage", "");
   };
 
   const showForm = () => {
-    console.log("from emailform", localStorage);
     return (
       <form onSubmit={handleSubmit}>
         <label>E-mail</label>
         <br />
-        <input name="email" value={formText} onChange={handleChange} />
+        <input type="text" value={formText} onChange={handleChange} />
         <br />
         <input className="submitButton" type="submit" value="Submit" />
       </form>
@@ -45,7 +43,7 @@ export default function EmailForm() {
   ) : (
     <p>
       {localStorage.getItem("emailInLocalStorage")}
-      <p onClick={() => clearStorage()}>[change]</p>
+      <p onClick={clearStorage}>[change]</p>
     </p>
   );
 }
