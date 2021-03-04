@@ -7,9 +7,16 @@ const ContextProvider = ({ children }) => {
       ? localStorage.getItem("emailInLocalStorage")
       : "E-mail"
   );
+
+  const [nickName, setNickName] = useState(
+    localStorage.getItem("nickInLocalStorage")
+      ? localStorage.getItem("nickInLocalStorage")
+      : "Nickname"
+  );
+
   const context = {
-    setEmail,
-    email,
+    email: [email, setEmail],
+    nickName: [nickName, setNickName],
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

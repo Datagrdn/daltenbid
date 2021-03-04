@@ -53,8 +53,8 @@ const ShowForm = (email) => {
 };
 
 export default function Bid() {
-  const { email } = useContext(AppContext);
-
+  const { email, nickName } = useContext(AppContext);
+  console.log(email, nickName);
   return (
     <Popup trigger={<button>Bid</button>} position="top left">
       {email.includes("@") ? ShowForm(email) : <p>Please Enter E-mail</p>}

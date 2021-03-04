@@ -2,26 +2,46 @@ import React, { useState, useContext, useEffect } from "react";
 import AppContext from "../context";
 
 export default function EmailForm() {
-  const { email, setEmail } = useContext(AppContext);
-  const [formText, setFormText] = useState("");
+  // const { email, setEmail } = useContext(AppContext);
+  // const [formText, setFormText] = useState("");
+
+  const { email, nickName } = useContext(AppContext);
+  const [stateEmail, setEmail] = email;
+  const [stateNickName, setNickName] = nickName;
+  const [state, setState] = useState({
+    email: "",
+    nickName: "",
+  });
+
+  // const [emailText, setEmailText] = useState("");
+  // const [nickNameText, setNickNameText] = useState("");
 
   // useEffect(() => {
   //   localStorage.setItem("emailInLocalStorage", email);
   // }, [email]);
 
   const handleChange = (e) => {
-    setFormText(e.target.value);
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEmail(formText);
-    localStorage.setItem("emailInLocalStorage", formText);
+    if (state.email.includes("@") && state.nickName) {
+      setEmail(state.email);
+      setNickName(state.nickName);
+      localStorage.setItem("emailInLocalStorage", state.email);
+      localStorage.setItem("nickNameInLocalStorage", state.nickName);
+    }
   };
 
   const clearStorage = () => {
     console.log("clear storage");
     setEmail("");
+    setNickName("");
     localStorage.setItem("emailInLocalStorage", "");
   };
 
@@ -30,7 +50,21 @@ export default function EmailForm() {
       <form onSubmit={handleSubmit}>
         <label>E-mail</label>
         <br />
-        <input type="text" value={formText} onChange={handleChange} />
+        <input
+          type="text"
+          name="email"
+          value={state.email}
+          onChange={handleChange}
+        />
+        <br />
+        <label>Nick Name</label>
+        <br />
+        <input
+          type="text"
+          name="nickName"
+          value={state.nickName}
+          onChange={handleChange}
+        />
         <br />
         <input className="submitButton" type="submit" value="Submit" />
       </form>
@@ -43,6 +77,7 @@ export default function EmailForm() {
   ) : (
     <p>
       {localStorage.getItem("emailInLocalStorage")}
+      <br />"{localStorage.getItem("nickNameInLocalStorage")}"
       <p onClick={clearStorage}>[change]</p>
     </p>
   );
