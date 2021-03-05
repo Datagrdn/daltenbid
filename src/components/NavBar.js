@@ -71,7 +71,7 @@ export default function NavBar() {
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>
-                {" "}
+                å
                 {!localStorage.getItem("nickNameInLocalStorage")
                   ? "Login"
                   : "Account"}
