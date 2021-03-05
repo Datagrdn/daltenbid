@@ -1,9 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../context";
-import { Dropdown } from "react-bootstrap";
+import EmailForm from "./EmailForm";
+import { Dropdown, Modal, Button } from "react-bootstrap";
 
 export default function NavBar() {
   const { artists } = useContext(AppContext);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">
@@ -64,9 +71,26 @@ export default function NavBar() {
             placeholder="Search"
             aria-label="Search"
           /> */}
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+          <Button variant="primary" onClick={handleShow}>
             Login
-          </button>
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Login</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <EmailForm />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </form>
       </div>
     </nav>
