@@ -41,7 +41,7 @@ export default function NavBar() {
               </Dropdown.Menu>
             </Dropdown>
           </li>
-          <li class="nav-item active">
+          {/* <li class="nav-item active">
             <a class="nav-link" href="#">
               Home <span class="sr-only">(current)</span>
             </a>
@@ -55,24 +55,20 @@ export default function NavBar() {
             <a class="nav-link disabled" href="#">
               Disabled
             </a>
-          </li>
+          </li> */}
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input
+          {/* <input
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
+          /> */}
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+            Login
           </button>
         </form>
       </div>
     </nav>
   );
 }
-
-// {artists.map((artist) => (
-//     <p>{artist}</p>
-//   ))}
