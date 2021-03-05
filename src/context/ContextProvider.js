@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { nftData } from "../components/nftData";
 import AppContext from ".";
 
 const ContextProvider = ({ children }) => {
@@ -14,9 +15,17 @@ const ContextProvider = ({ children }) => {
       : "Nickname"
   );
 
+  const artists = [];
+  nftData.forEach((nft) => {
+    if (!artists.includes(nft.artist)) {
+      artists.push(nft.artist);
+    }
+  });
+
   const context = {
     email: [email, setEmail],
     nickName: [nickName, setNickName],
+    artists,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

@@ -5,7 +5,7 @@ export const nftData = [
     image:
       "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
     chain: "BSV",
-    artist: "~tocrex-holpen",
+    artist: "~dashus-navnul",
     topBid: "1.2",
     topBidder: "nickname",
   },
@@ -15,7 +15,7 @@ export const nftData = [
     image:
       "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
     chain: "RVN",
-    artist: "~tocrex-holpen",
+    artist: "~naltyc-wornes",
     topBid: "1.3",
     topBidder: "nickname",
   },
@@ -35,7 +35,7 @@ export const nftData = [
     image:
       "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
     chain: "ETH",
-    artist: "~tocrex-holpen",
+    artist: "~minder-folden",
     topBid: "1.3",
     topBidder: "nickname",
   },
