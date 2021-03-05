@@ -8,10 +8,10 @@ function Gallery() {
   return (
     <div className="Main">
       <div className="container-fluid mt-5">
-        <img src="https://dalten.org/images/dalten-sigil.svg" />
+        {/* <img src="https://dalten.org/images/dalten-sigil.svg" />
         <br />
         <br />
-        <EmailForm />
+        <EmailForm /> */}
         <NavBar />
         <NftTable nftData={nftData} />
       </div>
