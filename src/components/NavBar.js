@@ -42,6 +42,7 @@ export default function NavBar() {
               <Dropdown.Toggle id="dropdown-basic">Artists</Dropdown.Toggle>
 
               <Dropdown.Menu>
+                <Dropdown.Item>All</Dropdown.Item>
                 {artists.map((artist) => (
                   <Dropdown.Item href="#">{artist}</Dropdown.Item>
                 ))}

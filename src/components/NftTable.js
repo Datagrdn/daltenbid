@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from "../context";
 import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
-export default function NftTable(props) {
-  const { nftData } = props;
+export default function NftTable() {
+  const { nftData, selected } = useContext(AppContext);
 
   return (
     <div className="Main">

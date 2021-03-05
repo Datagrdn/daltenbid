@@ -1,8 +1,6 @@
 import React from "react";
-import { nftData } from "./nftData";
 import NftTable from "./NftTable";
 import NavBar from "./NavBar";
-import EmailForm from "./EmailForm";
 
 function Gallery() {
   return (
@@ -13,7 +11,7 @@ function Gallery() {
         <br />
         <EmailForm /> */}
         <NavBar />
-        <NftTable nftData={nftData} />
+        <NftTable />
       </div>
     </div>
   );
