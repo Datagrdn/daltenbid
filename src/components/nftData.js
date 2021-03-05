@@ -54,10 +54,10 @@ export const nftData = [
     title: "Cool Dude 6",
     image:
       "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
-    chain: "RVN",
+    chain: "ETH",
     artist: "~tocrex-holpen",
-    topBid: "1.3",
-    topBidder: "nickname",
+    topBid: "2.3",
+    topBidder: "new guy",
   },
   {
     id: 7,
