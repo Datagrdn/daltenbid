@@ -4,7 +4,16 @@ import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
 export default function NftTable() {
-  const { nftData, selected } = useContext(AppContext);
+  let { nftData, selected } = useContext(AppContext);
+  const [selectedArtist] = selected;
+
+  // console.log(nftData);
+
+  if (selectedArtist !== "all") {
+    nftData = nftData.filter((nft) => nft.artist === selectedArtist);
+  }
+
+  // console.log("after if", nftData);
 
   return (
     <div className="Main">
