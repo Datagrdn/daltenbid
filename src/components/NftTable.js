@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import AppContext from "../context";
-import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
 export default function NftTable() {

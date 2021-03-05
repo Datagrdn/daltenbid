@@ -10,8 +10,8 @@ const ContextProvider = ({ children }) => {
   );
 
   const [nickName, setNickName] = useState(
-    localStorage.getItem("nickInLocalStorage")
-      ? localStorage.getItem("nickInLocalStorage")
+    localStorage.getItem("nickNameInLocalStorage")
+      ? localStorage.getItem("nickNameInLocalStorage")
       : "Nickname"
   );
 

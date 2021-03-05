@@ -17,10 +17,12 @@ export default function EmailForm() {
       ...state,
       [e.target.name]: value,
     });
+    console.log(state);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(state.nickName);
     if (state.email.includes("@") && state.nickName) {
       setEmail(state.email);
       setNickName(state.nickName);

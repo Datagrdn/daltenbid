@@ -3,14 +3,7 @@ import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
-const ShowForm = (email, nftData) => {
-  // const [state, setState] = useState("");
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    // setState({ bid: e.target.value });
-  };
-
+const ShowForm = (nftData, handleChange, handleSubmit) => {
   return (
     <div>
       <div className="bid">
@@ -53,12 +46,13 @@ const ShowForm = (email, nftData) => {
         <table style={{ width: "100%" }}>
           <tr>
             <center>
-              <button
+              <Button
                 type="submit"
                 className="btn btn-primary btn-sm btn-block"
+                onClick={handleSubmit}
               >
                 Place Bid
-              </button>
+              </Button>
             </center>
           </tr>
         </table>
@@ -70,7 +64,25 @@ const ShowForm = (email, nftData) => {
 export default function Bid(props) {
   const { email, nickName, nftData } = useContext(AppContext);
 
+  const piece = nftData[props.id - 1];
+
   const [show, setShow] = useState(false);
+  const [state, setState] = useState();
+
+  const handleChange = (e) => {
+    setState({ newBid: e.target.value, newBidder: nickName });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({
+      bidObject: {
+        ...piece,
+        topBid: state.newBid,
+        topBidder: state.newBidder[0],
+      },
+    });
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -89,9 +101,7 @@ export default function Bid(props) {
               <div class="container">
                 <div class="row">
                   <div class="col-6">
-                    <p class="h4">
-                      {localStorage.getItem("nickNameInLocalStorage")}
-                    </p>
+                    <p class="h4">{nickName}</p>
                     {/* <p class="h4">{nftData[props.id - 1].title}</p> */}
                   </div>
                   <div class="col-3" style={{ color: "#8B8B8B" }}>
@@ -105,7 +115,7 @@ export default function Bid(props) {
         </Modal.Header>
         <Modal.Body>
           {email[0].includes("@") ? (
-            ShowForm(email, nftData[props.id - 1])
+            ShowForm(piece, handleChange, handleSubmit)
           ) : (
             <EmailForm />
           )}
