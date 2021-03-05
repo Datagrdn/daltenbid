@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import "reactjs-popup/dist/index.css";
 import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
@@ -8,33 +7,23 @@ const ShowForm = (email) => {
   return (
     <div>
       <div className="bid">
-        <table border="0" style={{ width: "100%" }}>
-          <tr>
-            <th>
-              <center>
-                <small>
-                  <b>{email}</b>
-                </small>
-              </center>
-            </th>
-          </tr>
-        </table>
-        <table border="0" style={{ width: "100%" }}>
-          <tr>
-            <th className="text-left" width="50%" style={{ color: "#8B8B8B" }}>
-              <small>Bid Amount: </small>
-            </th>
-            <th style={{ color: "#000000" }}>
-              <input
-                type="text"
-                className="form-control form-control-sm text-white"
-                placeholder="Bid Amount"
-                onChange={(e) => console.log(e.target.value)}
-                required
-              />
-            </th>
-          </tr>
-        </table>
+        <center>
+          <table border="0" style={{ width: "50%" }}>
+            <tr>
+              <th width="50%">Bid Amount</th>
+              <th style={{ color: "#000000" }}>
+                <input
+                  type="text"
+                  className="form-control form-control-sm text-white"
+                  placeholder="Bid Amount"
+                  onChange={(e) => console.log(e.target.value)}
+                  required
+                />
+              </th>
+            </tr>
+          </table>
+        </center>
+        <br />
         <table style={{ width: "100%" }}>
           <tr>
             <center>
@@ -60,9 +49,6 @@ export default function Bid() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    // <Popup trigger={<Button>Bid</Button>} position="top left">
-    //   {email[0].includes("@") ? ShowForm(email) : <p>Please Enter E-mail</p>}
-    // </Popup>
     <>
       <Button variant="primary" onClick={handleShow}>
         Bid
@@ -70,9 +56,20 @@ export default function Bid() {
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {!localStorage.getItem("nickNameInLocalStorage")
-              ? "Login"
-              : localStorage.getItem("nickNameInLocalStorage")}
+            {!localStorage.getItem("nickNameInLocalStorage") ? (
+              "Login"
+            ) : (
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    {localStorage.getItem("nickNameInLocalStorage")}
+                  </div>
+                  <div class="col" style={{ color: "#8B8B8B" }}>
+                    <small>({email})</small>
+                  </div>
+                </div>
+              </div>
+            )}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

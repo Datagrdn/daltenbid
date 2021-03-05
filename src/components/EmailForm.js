@@ -71,8 +71,9 @@ export default function EmailForm() {
     showForm()
   ) : (
     <p>
-      {localStorage.getItem("emailInLocalStorage")}
-      <br />"{localStorage.getItem("nickNameInLocalStorage")}"
+      <br />
+      Logged in as <b>{localStorage.getItem("emailInLocalStorage")}</b>
+      <br />
       <br />
       <br />
       <Button onClick={clearStorage}>Edit</Button>
