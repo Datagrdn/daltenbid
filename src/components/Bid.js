@@ -18,8 +18,9 @@ const ShowForm = (email, nftData) => {
           <div class="container">
             <div class="row">
               <div class="col">
-                <b>{nftData.title}</b> by <b>{nftData.artist}</b>
-                <br />
+                <p class="h5">
+                  <b>{nftData.title}</b> by <b>{nftData.artist}</b>
+                </p>
                 <br />
                 <img
                   src={nftData.image}
@@ -87,8 +88,10 @@ export default function Bid(props) {
             ) : (
               <div class="container">
                 <div class="row">
-                  <div class="col-3">
-                    {localStorage.getItem("nickNameInLocalStorage")}
+                  <div class="col-6">
+                    <p class="h4">
+                      {localStorage.getItem("nickNameInLocalStorage")}
+                    </p>
                     {/* <p class="h4">{nftData[props.id - 1].title}</p> */}
                   </div>
                   <div class="col-3" style={{ color: "#8B8B8B" }}>
