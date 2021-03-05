@@ -1,10 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import AppContext from "../context";
+import { Button } from "react-bootstrap";
 
 export default function EmailForm() {
-  // const { email, setEmail } = useContext(AppContext);
-  // const [formText, setFormText] = useState("");
-
   const { email, nickName } = useContext(AppContext);
   const [stateEmail, setEmail] = email;
   const [stateNickName, setNickName] = nickName;
@@ -12,13 +10,6 @@ export default function EmailForm() {
     email: "",
     nickName: "",
   });
-
-  // const [emailText, setEmailText] = useState("");
-  // const [nickNameText, setNickNameText] = useState("");
-
-  // useEffect(() => {
-  //   localStorage.setItem("emailInLocalStorage", email);
-  // }, [email]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -45,11 +36,12 @@ export default function EmailForm() {
     setEmail("");
     setNickName("");
     localStorage.setItem("emailInLocalStorage", "");
+    localStorage.setItem("nickNameInLocalStorage", "");
   };
 
   const showForm = () => {
     return (
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>E-mail</label>
         <br />
         <input
@@ -68,7 +60,8 @@ export default function EmailForm() {
           onChange={handleChange}
         />
         <br />
-        <input className="submitButton" type="submit" value="Submit" />
+        <br />
+        <Button onClick={handleSubmit}>Submit</Button>
       </form>
     );
   };
@@ -80,7 +73,9 @@ export default function EmailForm() {
     <p>
       {localStorage.getItem("emailInLocalStorage")}
       <br />"{localStorage.getItem("nickNameInLocalStorage")}"
-      <p onClick={clearStorage}>[change]</p>
+      <br />
+      <br />
+      <Button onClick={clearStorage}>Edit</Button>
     </p>
   );
 }

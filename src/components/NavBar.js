@@ -48,48 +48,34 @@ export default function NavBar() {
               </Dropdown.Menu>
             </Dropdown>
           </li>
-          {/* <li class="nav-item active">
-            <a class="nav-link" href="#">
-              Home <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Link
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">
-              Disabled
-            </a>
-          </li> */}
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          {/* <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          /> */}
           <Button variant="primary" onClick={handleShow}>
-            Login
+            {!localStorage.getItem("nickNameInLocalStorage")
+              ? "Login"
+              : localStorage.getItem("nickNameInLocalStorage")}
           </Button>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Login</Modal.Title>
+              <Modal.Title>
+                {" "}
+                {!localStorage.getItem("nickNameInLocalStorage")
+                  ? "Login"
+                  : "Account"}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <EmailForm />
             </Modal.Body>
-            <Modal.Footer>
+            {/* <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
               <Button variant="primary" onClick={handleClose}>
                 Save Changes
               </Button>
-            </Modal.Footer>
+            </Modal.Footer> */}
           </Modal>
         </form>
       </div>

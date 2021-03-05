@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Popup from "reactjs-popup";
 import AppContext from "../context";
 import "reactjs-popup/dist/index.css";
+import { Button } from "react-bootstrap";
 
 const ShowForm = (email) => {
   return (close) => (
@@ -55,7 +56,7 @@ const ShowForm = (email) => {
 export default function Bid() {
   const { email, nickName } = useContext(AppContext);
   return (
-    <Popup trigger={<button>Bid</button>} position="top left">
+    <Popup trigger={<Button>Bid</Button>} position="top left">
       {email[0].includes("@") ? ShowForm(email) : <p>Please Enter E-mail</p>}
     </Popup>
   );
