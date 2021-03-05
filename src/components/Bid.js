@@ -13,6 +13,11 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
               <div class="col">
                 <p class="h5">
                   <b>{nftData.title}</b> by <b>{nftData.artist}</b>
+                  <br />
+                  <small>
+                    Current bid {nftData.topBid}&nbsp;
+                    {nftData.chain}
+                  </small>
                 </p>
                 <br />
                 <img
@@ -76,8 +81,7 @@ export default function Bid(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check to see if new bid is higher than current bid
-    if (state.newBid > piece.topBid) {
+    const sendBidToUrbit = () => {
       console.log({
         bidObject: {
           ...piece,
@@ -85,6 +89,11 @@ export default function Bid(props) {
           topBidder: state.newBidder[0],
         },
       });
+    };
+
+    // Check to see if new bid is higher than current bid
+    if (state.newBid > piece.topBid) {
+      sendBidToUrbit();
     } else {
       window.alert(`Bid must be greater than ${piece.topBid}`);
     }
