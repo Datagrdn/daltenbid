@@ -3,25 +3,50 @@ import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
-const ShowForm = (email) => {
+const ShowForm = (email, nftData) => {
+  // const [state, setState] = useState("");
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    // setState({ bid: e.target.value });
+  };
+
   return (
     <div>
       <div className="bid">
         <center>
-          <table border="0" style={{ width: "50%" }}>
-            <tr>
-              <th width="50%">Bid Amount</th>
-              <th style={{ color: "#000000" }}>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <b>{nftData.title}</b> by <b>{nftData.artist}</b>
+                <br />
+                <br />
+                <img
+                  src={nftData.image}
+                  style={{
+                    border: "1mm ridge",
+                    width: "200px",
+                    height: "300px",
+                  }}
+                />
+              </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+              <div class="col">Bid Amount</div>
+              <div class="col-3 text-right" style={{ color: "#000000" }}>
                 <input
                   type="text"
-                  className="form-control form-control-sm text-white"
-                  placeholder="Bid Amount"
-                  onChange={(e) => console.log(e.target.value)}
+                  className="form-control form-control-sm"
+                  placeholder="Amount"
+                  onChange={handleChange}
                   required
                 />
-              </th>
-            </tr>
-          </table>
+              </div>
+              <div class="col-2 text-left">{nftData.chain}</div>
+            </div>
+          </div>
         </center>
         <br />
         <table style={{ width: "100%" }}>
@@ -41,13 +66,14 @@ const ShowForm = (email) => {
   );
 };
 
-export default function Bid() {
-  const { email, nickName } = useContext(AppContext);
+export default function Bid(props) {
+  const { email, nickName, nftData } = useContext(AppContext);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -61,11 +87,13 @@ export default function Bid() {
             ) : (
               <div class="container">
                 <div class="row">
-                  <div class="col">
+                  <div class="col-3">
                     {localStorage.getItem("nickNameInLocalStorage")}
+                    {/* <p class="h4">{nftData[props.id - 1].title}</p> */}
                   </div>
-                  <div class="col" style={{ color: "#8B8B8B" }}>
-                    <small>({email})</small>
+                  <div class="col-3" style={{ color: "#8B8B8B" }}>
+                    <small class="h6">({email})</small>
+                    {/* <p class="h6">{nftData[props.id - 1].artist}</p> */}
                   </div>
                 </div>
               </div>
@@ -73,7 +101,11 @@ export default function Bid() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {email[0].includes("@") ? ShowForm(email) : <EmailForm />}
+          {email[0].includes("@") ? (
+            ShowForm(email, nftData[props.id - 1])
+          ) : (
+            <EmailForm />
+          )}
         </Modal.Body>
         {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

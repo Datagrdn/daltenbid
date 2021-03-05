@@ -4,8 +4,8 @@ import EmailForm from "./EmailForm";
 import { Dropdown, Modal, Button } from "react-bootstrap";
 
 export default function NavBar() {
-  const { artists, selected } = useContext(AppContext);
-  const [selectedArtist, setSelectedArtist] = selected;
+  const { artists, selectedArtistObject } = useContext(AppContext);
+  const [selectedArtist, setSelectedArtist] = selectedArtistObject;
 
   const [show, setShow] = useState(false);
 

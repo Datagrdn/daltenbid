@@ -4,8 +4,8 @@ import "reactjs-popup/dist/index.css";
 import Bid from "./Bid";
 
 export default function NftTable() {
-  let { nftData, selected } = useContext(AppContext);
-  const [selectedArtist] = selected;
+  let { nftData, selectedArtistObject } = useContext(AppContext);
+  const [selectedArtist] = selectedArtistObject;
 
   // console.log(nftData);
 
@@ -43,7 +43,7 @@ export default function NftTable() {
                               className="text-left"
                               style={{ color: "#8B8B8B" }}
                             >
-                              Title:{" "}
+                              Title:
                             </th>
                             <th style={{ color: "#000000" }}>{nft.title}</th>
                           </tr>
@@ -54,7 +54,7 @@ export default function NftTable() {
                               className="text-left"
                               style={{ color: "#8B8B8B" }}
                             >
-                              Artist:{" "}
+                              Artist:
                             </th>
                             <td>
                               <a
@@ -72,7 +72,7 @@ export default function NftTable() {
                               className="text-left"
                               style={{ color: "#8B8B8B" }}
                             >
-                              Top Bid:{" "}
+                              Top Bid:
                             </th>
                             <th style={{ color: "#000000" }}>
                               {nft.topBid} {nft.chain}
@@ -83,7 +83,7 @@ export default function NftTable() {
                               className="text-left"
                               style={{ color: "#8B8B8B" }}
                             >
-                              Top Bidder:{" "}
+                              Top Bidder:
                             </th>
                             <th style={{ color: "#000000" }}>
                               {nft.topBidder}
@@ -91,7 +91,7 @@ export default function NftTable() {
                           </tr>
                         </tbody>
                       </table>
-                      <Bid />
+                      <Bid id={nft.id} />
                     </div>
                   );
                 })}

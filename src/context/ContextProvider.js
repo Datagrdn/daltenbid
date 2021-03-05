@@ -15,8 +15,10 @@ const ContextProvider = ({ children }) => {
       : "Nickname"
   );
 
-  const [selected, setSelected] = useState("all");
+  const [selectedArtist, setSelectedArtist] = useState("all");
+  const [selectedPiece, setSelectedPiece] = useState("");
 
+  // Creates an array of all artists from nftData
   const artists = [];
   nftData.forEach((nft) => {
     if (!artists.includes(nft.artist)) {
@@ -27,7 +29,8 @@ const ContextProvider = ({ children }) => {
   const context = {
     email: [email, setEmail],
     nickName: [nickName, setNickName],
-    selected: [selected, setSelected],
+    selectedArtistObject: [selectedArtist, setSelectedArtist],
+    selctedPieceObject: [selectedPiece, setSelectedPiece],
     artists,
     nftData,
   };
