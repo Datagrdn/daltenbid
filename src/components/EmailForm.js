@@ -35,6 +35,8 @@ export default function EmailForm() {
       setNickName(state.nickName);
       localStorage.setItem("emailInLocalStorage", state.email);
       localStorage.setItem("nickNameInLocalStorage", state.nickName);
+    } else {
+      window.alert("Please enter valid e-mail and nickname");
     }
   };
 
