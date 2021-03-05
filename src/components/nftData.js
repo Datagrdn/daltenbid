@@ -79,4 +79,24 @@ export const nftData = [
     topBid: "1.3",
     topBidder: "nickname",
   },
+  {
+    id: 9,
+    title: "Cool Dude 9",
+    image:
+      "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
+    chain: "BSV",
+    artist: "~dashus-navnul",
+    topBid: "1.2",
+    topBidder: "nickname",
+  },
+  {
+    id: 10,
+    title: "Cool Dude 10",
+    image:
+      "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
+    chain: "ETH",
+    artist: "~minder-folden",
+    topBid: "1.3",
+    topBidder: "nickname",
+  },
 ];

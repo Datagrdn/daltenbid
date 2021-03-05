@@ -4,12 +4,17 @@ import EmailForm from "./EmailForm";
 import { Dropdown, Modal, Button } from "react-bootstrap";
 
 export default function NavBar() {
-  const { artists } = useContext(AppContext);
+  const { artists, selected } = useContext(AppContext);
+  const [selectedArtist, setSelectedArtist] = selected;
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const selectArtist = (artist) => {
+    setSelectedArtist(artist);
+  };
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,12 +44,18 @@ export default function NavBar() {
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
             <Dropdown>
-              <Dropdown.Toggle id="dropdown-basic">Artists</Dropdown.Toggle>
+              <Dropdown.Toggle id="dropdown-basic">
+                {selectedArtist === "all" ? "Artists" : selectedArtist}
+              </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item>All</Dropdown.Item>
+                <Dropdown.Item onClick={() => selectArtist("all")}>
+                  All
+                </Dropdown.Item>
                 {artists.map((artist) => (
-                  <Dropdown.Item href="#">{artist}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => selectArtist(artist)}>
+                    {artist}
+                  </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>
