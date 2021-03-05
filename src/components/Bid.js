@@ -75,13 +75,19 @@ export default function Bid(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      bidObject: {
-        ...piece,
-        topBid: state.newBid,
-        topBidder: state.newBidder[0],
-      },
-    });
+
+    // Check to see if new bid is higher than current bid
+    if (state.newBid > piece.topBid) {
+      console.log({
+        bidObject: {
+          ...piece,
+          topBid: state.newBid,
+          topBidder: state.newBidder[0],
+        },
+      });
+    } else {
+      window.alert(`Bid must be greater than ${piece.topBid}`);
+    }
   };
 
   const handleClose = () => setShow(false);
