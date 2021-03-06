@@ -5,24 +5,27 @@ import Bid from "./Bid";
 export default function NftTable(props) {
   const urb = props.api;
 
-  const [test, setnftdata] = useState([]);
+  const [nftData, setnftdata] = useState([]);
 
   const callback = useCallback(setnftdata, [setnftdata]); 
   useEffect(() => { 
-     const sub = urb.subscribe({app: 'daltenauction', path: '/auctionsite', event: callback}); 
+    const sub = urb.subscribe({app: 'daltenauction', path: '/auctionsite', event: data => {
+      console.log(data);
+      callback(data);
+    }}); 
     return () => urb.unsubscribe(sub); 
   }, []); 
 
-  console.log(test);
+  console.log(nftData);
 
-  let { nftData, selectedArtistObject } = useContext(AppContext);
+  let { selectedArtistObject } = useContext(AppContext);
   const [selectedArtist] = selectedArtistObject;
 
   // console.log(nftData);
-
-  if (selectedArtist !== "all") {
-    nftData = nftData.filter((nft) => nft.artist === selectedArtist);
-  }
+  //var nftDatatest = [];
+  //if (selectedArtist !== "all") {
+  //  nftDatatest = nftData.filter((nft) => nft.artist === selectedArtist);
+  //}
 
   // console.log("after if", nftData);
 
@@ -102,7 +105,7 @@ export default function NftTable(props) {
                           </tr>
                         </tbody>
                       </table>
-                      <Bid id={nft.id} />
+                      
                     </div>
                   );
                 })}
