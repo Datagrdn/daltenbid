@@ -4,6 +4,7 @@ import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
 const ShowForm = (nftData, handleChange, handleSubmit) => {
+  // console.log(nftData.title, "by", nftData.artist);
   return (
     <div>
       <div className="bid">
@@ -17,7 +18,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
                 </p>
                 <br />
                 <img
-                  src={nftData.image}
+                  src={nftData.uri}
                   style={{
                     border: "1mm ridge",
                     width: "200px",
@@ -78,7 +79,9 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
 export default function Bid(props) {
   const { email, nickName, nftData } = useContext(AppContext);
 
-  const piece = nftData[props.id - 1];
+  console.log(nftData);
+  const piece = nftData[props.id];
+  console.log(piece);
 
   const [show, setShow] = useState(false);
   const [state, setState] = useState();

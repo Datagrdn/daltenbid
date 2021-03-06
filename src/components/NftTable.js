@@ -22,7 +22,8 @@ export default function NftTable(props) {
                 className="row justify-content-around"
                 style={{ width: "1000px", fontSize: "13px" }}
               >
-                {nftData.map((nft) => {
+                {nftData.map((nft, index) => {
+                  console.log(index);
                   return (
                     <div className="p-3" key={nft.id}>
                       <img
@@ -88,7 +89,7 @@ export default function NftTable(props) {
                           </tr>
                         </tbody>
                       </table>
-                      {/* <Bid id={nft.id} /> */}
+                      <Bid id={index} />
                     </div>
                   );
                 })}
