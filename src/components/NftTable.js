@@ -1,40 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import AppContext from "../context";
 import Bid from "./Bid";
 
 export default function NftTable(props) {
-  var nftData = [];
   const urb = props.api;
-  console.log(urb);
-  const [nftDataAll, setnftData] = useState([]);
 
-  useEffect(() => { const sub = urb.subscribe({ app: 'daltenauction', path: '/auctionsite', event: data => {
-    setnftData([
-      {
-        artist: "~dashus-navnul",
-        id: 1,
-        title: "Cool Dude 1",
-        image:
-          "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
-        chain: "BSV",
-        topBid: "1.2",
-        topBidder: "nickname",
-      }
-    ]);
-    console.log("here");
-  }}, [nftDataAll, setnftData])
-  }, []);
-  
+  const [nftData, setnftData] = useState([]);
+
+  const callback = useCallback(setnftData, [setnftData]); 
+  useEffect(() => { 
+     const sub = urb.subscribe({app: 'daltenauction', path: '/auctionsite', event: callback}); 
+    return () => urb.unsubscribe(sub); 
+  }, []); 
+
   let { selectedArtistObject } = useContext(AppContext);
   const [selectedArtist] = selectedArtistObject;
 
   // console.log(nftData);
-
+  var nftDatatest = [];
   if (selectedArtist !== "all") {
-    nftData = nftDataAll.filter((nft) => nft.artist === selectedArtist);
+    nftDatatest = nftData.filter((nft) => nft.artist === selectedArtist);
   } else {
-    nftData = nftDataAll;
-  }
+    nftDatatest = nftData;
+  };
 
   console.log("after if", nftData);
 
