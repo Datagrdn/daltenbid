@@ -1,18 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import AppContext from "../context";
 import Bid from "./Bid";
 
-export default function NftTable() {
-  let { nftData, selectedArtistObject } = useContext(AppContext);
-  const [selectedArtist] = selectedArtistObject;
+export default function NftTable(props) {
+  // let { nftData, selectedArtistObject } = useContext(AppContext);
+  // const [selectedArtist] = selectedArtistObject;
 
-  // console.log(nftData);
+  // if (selectedArtist !== "all") {
+  //   nftData = nftData.filter((nft) => nft.artist === selectedArtist);
+  // }
 
-  if (selectedArtist !== "all") {
-    nftData = nftData.filter((nft) => nft.artist === selectedArtist);
-  }
+  const urb = props.api;
+  console.log(urb);
 
-  // console.log("after if", nftData);
+  const [nftData, setNftData] = useState([]);
+
+  const callback = useCallback(setNftData, [setNftData]);
+  useEffect(() => {
+    const sub = urb.subscribe({
+      app: "daltenauction",
+      path: "/auctionsite",
+      event: callback,
+    });
+    return () => urb.unsubscribe(sub);
+  }, []);
+
+  console.log(nftData);
 
   return (
     <div className="Main">
@@ -28,7 +41,7 @@ export default function NftTable() {
                   return (
                     <div className="p-3" key={nft.id}>
                       <img
-                        src={nft.image}
+                        src={nft.uri}
                         style={{
                           border: "1mm ridge",
                           width: "200px",
@@ -90,7 +103,7 @@ export default function NftTable() {
                           </tr>
                         </tbody>
                       </table>
-                      <Bid id={nft.id} />
+                      {/* <Bid id={nft.id} /> */}
                     </div>
                   );
                 })}
