@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { nftData } from "../components/nftData";
 import createApi from "../createApi";
 import AppContext from ".";
 
@@ -20,7 +19,7 @@ const ContextProvider = ({ children }) => {
   const [selectedPiece, setSelectedPiece] = useState("");
 
   const [nftData, setNftData] = useState([]);
-
+  const [urb, setUrb] = useState();
   const callback = useCallback(setNftData, [setNftData]);
   useEffect(async () => {
     const urb = await createApi();
@@ -31,6 +30,16 @@ const ContextProvider = ({ children }) => {
     });
     return () => urb.unsubscribe(sub);
   }, []);
+
+  const somePoke = useCallback(
+    (pokeArgs) => {
+      if (!urb) {
+        console.error("Poked before Urbit API initialized");
+      }
+      urb.poke();
+    },
+    [urb]
+  );
 
   // Creates an array of all artists from nftData
   const artists = [];
