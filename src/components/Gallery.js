@@ -2,7 +2,8 @@ import React from "react";
 import NftTable from "./NftTable";
 import NavBar from "./NavBar";
 
-function Gallery() {
+function Gallery(props) {
+  const {api} = props;
   return (
     <div className="Main">
       <div className="container-fluid mt-5">
@@ -11,7 +12,7 @@ function Gallery() {
         <br />
         <EmailForm /> */}
         <NavBar />
-        <NftTable />
+        <NftTable api={api} {...props}/>
       </div>
     </div>
   );

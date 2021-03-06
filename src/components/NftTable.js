@@ -1,19 +1,44 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context";
 import Bid from "./Bid";
 
-export default function NftTable() {
-  let { nftData, selectedArtistObject } = useContext(AppContext);
+export default function NftTable(props) {
+  var nftData = [];
+  const urb = props.api;
+  console.log(urb);
+  const [nftDataAll, setnftData] = useState([]);
+
+  useEffect(() => { const sub = urb.subscribe({ app: 'daltenauction', path: '/auctionsite', event: data => {
+    setnftData([
+      {
+        artist: "~dashus-navnul",
+        id: 1,
+        title: "Cool Dude 1",
+        image:
+          "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
+        chain: "BSV",
+        topBid: "1.2",
+        topBidder: "nickname",
+      }
+    ]);
+    console.log("here");
+  }}, [nftDataAll, setnftData])
+  }, []);
+  
+  let { selectedArtistObject } = useContext(AppContext);
   const [selectedArtist] = selectedArtistObject;
 
   // console.log(nftData);
 
   if (selectedArtist !== "all") {
-    nftData = nftData.filter((nft) => nft.artist === selectedArtist);
+    nftData = nftDataAll.filter((nft) => nft.artist === selectedArtist);
+  } else {
+    nftData = nftDataAll;
   }
 
-  // console.log("after if", nftData);
+  console.log("after if", nftData);
 
+  const {api} = props;
   return (
     <div className="Main">
       <div className="container-fluid mt-5">
@@ -90,7 +115,7 @@ export default function NftTable() {
                           </tr>
                         </tbody>
                       </table>
-                      <Bid id={nft.id} />
+                      <Bid id={nft.id} nftData={api} {...props} />
                     </div>
                   );
                 })}

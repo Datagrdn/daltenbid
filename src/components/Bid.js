@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
@@ -76,7 +76,28 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
 };
 
 export default function Bid(props) {
-  const { email, nickName, nftData } = useContext(AppContext);
+  const { email, nickName } = useContext(AppContext);
+
+  const urb = props.api;
+  
+  const [nftData, setnftData] = useState([]);
+
+  useEffect(() => { const sub = urb.subscribe({ app: 'daltenauction', path: '/auctionsite', event: data => {
+    setnftData([
+      {
+        artist: "~dashus-navnul",
+        id: 1,
+        title: "Cool Dude 1",
+        image:
+          "https://cdn.shopify.com/s/files/1/2564/9670/products/Ballmoji_Cool_Dude_GD44-EC1_240x.png?v=1546226227",
+        chain: "BSV",
+        topBid: "1.2",
+        topBidder: "nickname",
+      }
+    ]);
+    console.log("here");
+  }}, [nftData, setnftData])
+  }, []);
 
   const piece = nftData[props.id - 1];
 
