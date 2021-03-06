@@ -5,7 +5,7 @@ import Bid from "./Bid";
 export default function NftTable(props) {
   const urb = props.api;
 
-  const [test, setnftdata] = [];
+  const [test, setnftdata] = useState([]);
 
   const callback = useCallback(setnftdata, [setnftdata]); 
   useEffect(() => { 
