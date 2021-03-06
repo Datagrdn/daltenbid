@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { nftData } from "../components/nftData";
+import createApi from "../createApi";
 import AppContext from ".";
 
 const ContextProvider = ({ children }) => {
@@ -17,6 +18,19 @@ const ContextProvider = ({ children }) => {
 
   const [selectedArtist, setSelectedArtist] = useState("all");
   const [selectedPiece, setSelectedPiece] = useState("");
+
+  const [nftData, setNftData] = useState([]);
+
+  const callback = useCallback(setNftData, [setNftData]);
+  useEffect(async () => {
+    const urb = await createApi();
+    const sub = urb.subscribe({
+      app: "daltenauction",
+      path: "/auctionsite",
+      event: callback,
+    });
+    return () => urb.unsubscribe(sub);
+  }, []);
 
   // Creates an array of all artists from nftData
   const artists = [];

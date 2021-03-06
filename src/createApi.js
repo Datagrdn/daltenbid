@@ -1,7 +1,7 @@
 import Urbit from "@urbit/http-api";
 import { memoize } from "lodash";
 
-const useApi = memoize(async () => {
+const createApi = memoize(async () => {
   const urb = await Urbit.authenticate({
     ship: "zod",
     url: "localhost:8080",
@@ -11,4 +11,4 @@ const useApi = memoize(async () => {
   return urb;
 });
 
-export default useApi;
+export default createApi;

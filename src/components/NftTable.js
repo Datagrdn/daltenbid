@@ -3,27 +3,12 @@ import AppContext from "../context";
 import Bid from "./Bid";
 
 export default function NftTable(props) {
-  // let { nftData, selectedArtistObject } = useContext(AppContext);
-  // const [selectedArtist] = selectedArtistObject;
+  let { nftData, selectedArtistObject } = useContext(AppContext);
+  const [selectedArtist] = selectedArtistObject;
 
-  // if (selectedArtist !== "all") {
-  //   nftData = nftData.filter((nft) => nft.artist === selectedArtist);
-  // }
-
-  const urb = props.api;
-  console.log(urb);
-
-  const [nftData, setNftData] = useState([]);
-
-  const callback = useCallback(setNftData, [setNftData]);
-  useEffect(() => {
-    const sub = urb.subscribe({
-      app: "daltenauction",
-      path: "/auctionsite",
-      event: callback,
-    });
-    return () => urb.unsubscribe(sub);
-  }, []);
+  if (selectedArtist !== "all") {
+    nftData = nftData.filter((nft) => nft.artist === selectedArtist);
+  }
 
   console.log(nftData);
 
