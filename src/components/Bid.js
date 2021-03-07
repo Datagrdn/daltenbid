@@ -77,7 +77,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
 };
 
 export default function Bid(props) {
-  const { email, nickName, nftData } = useContext(AppContext);
+  const { email, nickName, nftData, bidItem } = useContext(AppContext);
 
   console.log(nftData);
   const piece = nftData[props.id];
@@ -102,6 +102,8 @@ export default function Bid(props) {
         },
       });
     };
+
+    bidItem();
 
     // Check to see if new bid is higher than current bid
     if (state.newBid > piece.topBid) {

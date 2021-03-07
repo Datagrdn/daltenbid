@@ -22,21 +22,32 @@ const ContextProvider = ({ children }) => {
   const [urb, setUrb] = useState();
   const callback = useCallback(setNftData, [setNftData]);
   useEffect(async () => {
-    const urb = await createApi();
-    const sub = urb.subscribe({
+    const _urb = await createApi();
+    const sub = _urb.subscribe({
       app: "daltenauction",
       path: "/auctionsite",
       event: callback,
     });
-    return () => urb.unsubscribe(sub);
+    setUrb(_urb);
+    return () => _urb.unsubscribe(sub);
   }, []);
 
-  const somePoke = useCallback(
-    (pokeArgs) => {
+  const bidItem = useCallback(
+    async (pokeArgs) => {
       if (!urb) {
         console.error("Poked before Urbit API initialized");
       }
-      urb.poke();
+      urb.poke({
+        app: "daltenauction",
+        mark: "dalatenauction-action",
+        json: {
+          "bid-item": {
+            email: "jon@datagarden.org",
+            "exhibit-id": 4,
+            "bid-amt": 101,
+          },
+        },
+      });
     },
     [urb]
   );
@@ -56,6 +67,7 @@ const ContextProvider = ({ children }) => {
     selctedPieceObject: [selectedPiece, setSelectedPiece],
     artists,
     nftData,
+    bidItem,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
