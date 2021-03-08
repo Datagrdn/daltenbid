@@ -21,22 +21,38 @@ const ContextProvider = ({ children }) => {
   const [nftData, setNftData] = useState([]);
   const [urb, setUrb] = useState();
   const callback = useCallback(setNftData, [setNftData]);
+  
   useEffect(async () => {
-    const urb = await createApi();
-    const sub = urb.subscribe({
+    const _urb = await createApi();
+    const sub = _urb.subscribe({
       app: "daltenauction",
       path: "/auctionsite",
       event: callback,
     });
+    setUrb(_urb);
     return () => urb.unsubscribe(sub);
-  }, []);
+  }, [urb]);
+
+  const bidPoke = (pokeargs) => {
+    urb.poke(pokeargs);
+  }
 
   const somePoke = useCallback(
     (pokeArgs) => {
       if (!urb) {
         console.error("Poked before Urbit API initialized");
       }
-      urb.poke();
+      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'bid-item': {'email': 'test@testemail.com', 'exhibit-id': 1, 'bid-amt': 500}}});
+    },
+    [urb]
+  );
+
+  const addBidder = useCallback(
+    (pokeArgs) => {
+      if (!urb) {
+        console.error("Poked before Urbit API initialized");
+      }
+      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'add-bidder': pokeArgs}});
     },
     [urb]
   );
@@ -56,6 +72,8 @@ const ContextProvider = ({ children }) => {
     selctedPieceObject: [selectedPiece, setSelectedPiece],
     artists,
     nftData,
+    somePoke,
+    addBidder
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

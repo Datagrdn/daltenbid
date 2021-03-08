@@ -77,7 +77,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
 };
 
 export default function Bid(props) {
-  const { email, nickName, nftData } = useContext(AppContext);
+  const { email, nickName, nftData, urb } = useContext(AppContext);
 
   console.log(nftData);
   const piece = nftData[props.id];
@@ -92,15 +92,8 @@ export default function Bid(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const sendBidToUrbit = () => {
-      console.log({
-        bidObject: {
-          ...piece,
-          topBid: state.newBid,
-          topBidder: state.newBidder[0],
-        },
-      });
+      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'bid-item': {'email': email, 'exhibit-id': nftData.id, 'bid-amt': state.newBid}}});
     };
 
     // Check to see if new bid is higher than current bid

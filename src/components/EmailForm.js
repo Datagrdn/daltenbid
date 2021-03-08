@@ -3,7 +3,7 @@ import AppContext from "../context";
 import { Button } from "react-bootstrap";
 
 export default function EmailForm() {
-  const { email, nickName } = useContext(AppContext);
+  const { email, nickName, addBidder } = useContext(AppContext);
   const [stateEmail, setEmail] = email;
   const [stateNickName, setNickName] = nickName;
   const [state, setState] = useState({
@@ -28,6 +28,7 @@ export default function EmailForm() {
       setNickName(state.nickName);
       localStorage.setItem("emailInLocalStorage", state.email);
       localStorage.setItem("nickNameInLocalStorage", state.nickName);
+      addBidder({'email': state.email, 'nick': state.nickName})
     } else {
       window.alert("Please enter valid e-mail and nickname");
     }
