@@ -57,6 +57,16 @@ const ContextProvider = ({ children }) => {
     [urb]
   );
 
+  const bidItem = useCallback(
+    (pokeArgs) => {
+      if (!urb) {
+        console.error("Poked before Urbit API initialized");
+      }
+      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'bid-item': pokeArgs}});
+    },
+    [urb]
+  );
+
   // Creates an array of all artists from nftData
   const artists = [];
   nftData.forEach((nft) => {
@@ -72,7 +82,7 @@ const ContextProvider = ({ children }) => {
     selctedPieceObject: [selectedPiece, setSelectedPiece],
     artists,
     nftData,
-    somePoke,
+    bidItem,
     addBidder
   };
 
