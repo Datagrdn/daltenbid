@@ -4,7 +4,6 @@ import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
 const ShowForm = (nftData, handleChange, handleSubmit) => {
-  // console.log(nftData.title, "by", nftData.artist);
   return (
     <div>
       <div className="bid">
@@ -79,9 +78,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
 export default function Bid(props) {
   const { email, nickName, nftData, bidItem } = useContext(AppContext);
 
-  console.log(nftData);
   const piece = nftData[props.id];
-  console.log(piece);
 
   const [show, setShow] = useState(false);
   const [state, setState] = useState();
@@ -93,8 +90,6 @@ export default function Bid(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const sendBidToUrbit = () => {
-      console.log(nftData[props.id].id);
-      console.log(parseInt(state.newBid));
       bidItem({'email': email[0], 'exhibit-id': nftData[props.id].id, 'bid-amt': parseInt(state.newBid)});
     };
 
