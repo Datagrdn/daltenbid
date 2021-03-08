@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import AppContext from "../context";
 import Bid from "./Bid";
+import { toEth } from "../helpers";
 
 export default function NftTable(props) {
   let { nftData, selectedArtistObject } = useContext(AppContext);
@@ -23,11 +24,12 @@ export default function NftTable(props) {
                 style={{ width: "1000px", fontSize: "13px" }}
               >
                 {nftData.map((nft, index) => {
+                  console.log(nft.uri);
                   console.log(index);
                   return (
                     <div className="p-3" key={`auction-item-${nft.id}`}>
                       <img
-                        src={nft.img}
+                        src={nft.uri}
                         style={{
                           border: "1mm ridge",
                           width: "200px",
@@ -73,7 +75,7 @@ export default function NftTable(props) {
                               Top Bid:
                             </th>
                             <th style={{ color: "#000000" }}>
-                              {nft.topBid} {nft.chain}
+                              {toEth(nft.topBid)} {nft.chain}
                             </th>
                           </tr>
                           <tr>
@@ -95,7 +97,7 @@ export default function NftTable(props) {
                               Find Out More:
                             </th>
                             <td>
-                            <a
+                              <a
                                 href={nft.uri}
                                 target="_blank"
                                 rel="noopener noreferrer"

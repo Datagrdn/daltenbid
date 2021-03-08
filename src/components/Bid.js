@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
+import { toWei, toEth } from "../helpers";
 
 const ShowForm = (nftData, handleChange, handleSubmit) => {
   return (
@@ -29,7 +30,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
                 <p class="h5">
                   <small>
                     <b>
-                      Current bid {nftData.topBid}&nbsp;
+                      Current bid {toEth(nftData.topBid)}&nbsp;
                       {nftData.chain}
                     </b>
                     &nbsp; by {nftData.topBidder}
@@ -90,7 +91,11 @@ export default function Bid(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const sendBidToUrbit = () => {
-      bidItem({'email': email[0], 'exhibit-id': nftData[props.id].id, 'bid-amt': parseInt(state.newBid)});
+      bidItem({
+        email: email[0],
+        "exhibit-id": nftData[props.id].id,
+        "bid-amt": parseInt(toWei(state.newBid)),
+      });
     };
 
     bidItem();
