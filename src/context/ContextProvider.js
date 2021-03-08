@@ -21,7 +21,7 @@ const ContextProvider = ({ children }) => {
   const [nftData, setNftData] = useState([]);
   const [urb, setUrb] = useState();
   const callback = useCallback(setNftData, [setNftData]);
-  
+
   useEffect(async () => {
     const _urb = await createApi();
     const sub = _urb.subscribe({
@@ -30,45 +30,23 @@ const ContextProvider = ({ children }) => {
       event: callback,
     });
     setUrb(_urb);
-<<<<<<< HEAD
-    return () => _urb.unsubscribe(sub);
-  }, []);
-=======
     return () => urb.unsubscribe(sub);
   }, [urb]);
 
   const bidPoke = (pokeargs) => {
     urb.poke(pokeargs);
-  }
->>>>>>> 3b16bbae4f901914eeb8b7fe18732af6d0be1b3f
-
-  const bidItem = useCallback(
-    async (pokeArgs) => {
-      if (!urb) {
-        console.error("Poked before Urbit API initialized");
-      }
-<<<<<<< HEAD
-      urb.poke({
-        app: "daltenauction",
-        mark: "dalatenauction-action",
-        json: {
-          "add-item": {
-            exhibit: 5,
-          },
-        },
-      });
-=======
-      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'bid-item': {'email': 'test@testemail.com', 'exhibit-id': 1, 'bid-amt': 500}}});
-    },
-    [urb]
-  );
+  };
 
   const addBidder = useCallback(
     (pokeArgs) => {
       if (!urb) {
         console.error("Poked before Urbit API initialized");
       }
-      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'add-bidder': pokeArgs}});
+      urb.poke({
+        app: "daltenauction",
+        mark: "daltenauction-action",
+        json: { "add-bidder": pokeArgs },
+      });
     },
     [urb]
   );
@@ -78,8 +56,11 @@ const ContextProvider = ({ children }) => {
       if (!urb) {
         console.error("Poked before Urbit API initialized");
       }
-      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'bid-item': pokeArgs}});
->>>>>>> 3b16bbae4f901914eeb8b7fe18732af6d0be1b3f
+      urb.poke({
+        app: "daltenauction",
+        mark: "daltenauction-action",
+        json: { "bid-item": pokeArgs },
+      });
     },
     [urb]
   );
@@ -100,10 +81,7 @@ const ContextProvider = ({ children }) => {
     artists,
     nftData,
     bidItem,
-<<<<<<< HEAD
-=======
-    addBidder
->>>>>>> 3b16bbae4f901914eeb8b7fe18732af6d0be1b3f
+    addBidder,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
