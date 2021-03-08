@@ -94,11 +94,14 @@ export default function Bid(props) {
     };
 
     // Check to see if new bid is higher than current bid
-    if (state.newBid > piece.topBid) {
+    if (state === undefined) {
+      window.alert("Please enter a bid.");
+    } else if (state.newBid > piece.topBid) {
       sendBidToUrbit();
+      setShow(false);
       window.alert("Congratulations you are currently the highest bidder!");
     } else {
-      window.alert(`Bid must be greater than ${piece.topBid} ${piece.chain}`);
+      window.alert(`Bid must be greater than ${piece.topBid} ${piece.chain}.`);
     }
   };
 

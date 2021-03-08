@@ -25,7 +25,7 @@ export default function NftTable(props) {
                 {nftData.map((nft, index) => {
                   console.log(index);
                   return (
-                    <div className="p-3" key={nft.id}>
+                    <div className="p-3" key={`auction-item-${nft.id}`}>
                       <img
                         src={nft.img}
                         style={{
