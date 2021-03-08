@@ -53,7 +53,7 @@ export default function NavBar() {
                   All
                 </Dropdown.Item>
                 {artists.map((artist) => (
-                  <Dropdown.Item onClick={() => selectArtist(artist)}>
+                  <Dropdown.Item key={`artist-${artist}`} onClick={() => selectArtist(artist)}>
                     {artist}
                   </Dropdown.Item>
                 ))}

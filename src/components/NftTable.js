@@ -25,9 +25,9 @@ export default function NftTable(props) {
                 {nftData.map((nft, index) => {
                   console.log(index);
                   return (
-                    <div className="p-3" key={nft.id}>
+                    <div className="p-3" key={`auction-item-${nft.id}`}>
                       <img
-                        src={nft.uri}
+                        src={nft.img}
                         style={{
                           border: "1mm ridge",
                           width: "200px",
@@ -86,6 +86,24 @@ export default function NftTable(props) {
                             <th style={{ color: "#000000" }}>
                               {nft.topBidder}
                             </th>
+                          </tr>
+                          <tr>
+                            <th
+                              className="text-left"
+                              style={{ color: "#8B8B8B" }}
+                            >
+                              Find Out More:
+                            </th>
+                            <td>
+                            <a
+                                href={nft.uri}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                // style={{ color: "#55FF55" }}
+                              >
+                                Here
+                              </a>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
