@@ -41,10 +41,8 @@ const ContextProvider = ({ children }) => {
         app: "daltenauction",
         mark: "dalatenauction-action",
         json: {
-          "bid-item": {
-            email: "jon@datagarden.org",
-            "exhibit-id": 4,
-            "bid-amt": 101,
+          "add-item": {
+            exhibit: 5,
           },
         },
       });
