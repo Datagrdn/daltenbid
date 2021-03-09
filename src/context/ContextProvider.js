@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import createApi from "../createApi";
 import AppContext from ".";
+import BigNumber from "bignumber.js"
 
 const ContextProvider = ({ children }) => {
   const [email, setEmail] = useState(
@@ -22,7 +23,8 @@ const ContextProvider = ({ children }) => {
   const [urb, setUrb] = useState();
   const callback = useCallback(setNftData, [setNftData]);
   
-  useEffect(async () => {
+  useEffect(() => {
+    async function fetchUrb() {
     const _urb = await createApi();
     const sub = _urb.subscribe({
       app: "daltenauction",
@@ -31,21 +33,31 @@ const ContextProvider = ({ children }) => {
     });
     setUrb(_urb);
     return () => urb.unsubscribe(sub);
-  }, [urb]);
-
-  const bidPoke = (pokeargs) => {
-    urb.poke(pokeargs);
   }
+  fetchUrb();
+  }, [urb, callback]);
 
-  const somePoke = useCallback(
-    (pokeArgs) => {
-      if (!urb) {
-        console.error("Poked before Urbit API initialized");
-      }
-      urb.poke({app: 'daltenauction', mark: 'daltenauction-action', json: {'bid-item': {'email': 'test@testemail.com', 'exhibit-id': 1, 'bid-amt': 500}}});
-    },
-    [urb]
-  );
+  const toHoonCrypto = (val, cur) => {
+    let inc = new BigNumber(val);
+    if (cur === 'eth') {
+      let conFact = new BigNumber(1e+18)
+      return inc.times(conFact).toFixed(0);
+    } else {
+      let conFact = new BigNumber(1e+8);
+      return inc.times(conFact).toFixed(0);
+    };
+  };
+  
+  const toDisplayCrypto = (val, cur) => {
+    let inc = new BigNumber(val);
+    if (cur === 'eth') {
+      let conFact = new BigNumber(1e+18)
+      return inc.dividedBy(conFact).toFixed(8);
+    } else {
+      let conFact = new BigNumber(1e+8);
+      return inc.dividedBy(conFact).toFixed(8);
+    };
+  };
 
   const addBidder = useCallback(
     (pokeArgs) => {
@@ -83,7 +95,9 @@ const ContextProvider = ({ children }) => {
     artists,
     nftData,
     bidItem,
-    addBidder
+    addBidder,
+    toHoonCrypto,
+    toDisplayCrypto
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

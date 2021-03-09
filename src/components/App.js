@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Gallery from "./Gallery";
 
 function App(props) {
-  const { api } = props;
-  return <Gallery api={api} />;
+  return <Gallery />;
 }
 
 export default App;
