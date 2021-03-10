@@ -27,7 +27,7 @@ export default function NftTable(props) {
                   return (
                     <div className="p-3" key={`auction-item-${nft.id}`}>
                       <img
-                        src={process.env.PUBLIC_URL + `${nft.image}`}
+                        src={nft.image}
                         alt={nft.title}
                         style={{
                           border: "1mm ridge",

@@ -18,7 +18,7 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
                 </p>
                 <br />
                 <img
-                  src={process.env.PUBLIC_URL + `${nftData.image}`}
+                  src={nftData.image}
                   alt={nftData.title}
                   style={{
                     border: ".5mm ridge",
