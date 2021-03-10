@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import createApi from "../createApi";
 import AppContext from ".";
+import BigNumber from "bignumber.js";
 
 const ContextProvider = ({ children }) => {
   const [email, setEmail] = useState(
@@ -22,19 +23,40 @@ const ContextProvider = ({ children }) => {
   const [urb, setUrb] = useState();
   const callback = useCallback(setNftData, [setNftData]);
 
-  useEffect(async () => {
-    const _urb = await createApi();
-    const sub = _urb.subscribe({
-      app: "daltenauction",
-      path: "/auctionsite",
-      event: callback,
-    });
-    setUrb(_urb);
-    return () => urb.unsubscribe(sub);
-  }, [urb]);
+  useEffect(() => {
+    async function fetchUrb() {
+      const _urb = await createApi();
+      const sub = _urb.subscribe({
+        app: "daltenauction",
+        path: "/auctionsite",
+        event: callback,
+      });
+      setUrb(_urb);
+      return () => urb.unsubscribe(sub);
+    }
+    fetchUrb();
+  }, [urb, callback]);
 
-  const bidPoke = (pokeargs) => {
-    urb.poke(pokeargs);
+  const toHoonCrypto = (val, cur) => {
+    let inc = new BigNumber(val);
+    if (cur === "eth") {
+      let conFact = new BigNumber(1e18);
+      return inc.times(conFact).toFixed(0);
+    } else {
+      let conFact = new BigNumber(1e8);
+      return inc.times(conFact).toFixed(0);
+    }
+  };
+
+  const toDisplayCrypto = (val, cur) => {
+    let inc = new BigNumber(val);
+    if (cur === "eth") {
+      let conFact = new BigNumber(1e18);
+      return inc.dividedBy(conFact).toFixed(8);
+    } else {
+      let conFact = new BigNumber(1e8);
+      return inc.dividedBy(conFact).toFixed(8);
+    }
   };
 
   const addBidder = useCallback(
@@ -82,6 +104,8 @@ const ContextProvider = ({ children }) => {
     nftData,
     bidItem,
     addBidder,
+    toHoonCrypto,
+    toDisplayCrypto,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

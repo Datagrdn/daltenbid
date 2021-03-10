@@ -4,21 +4,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import ContextProvider from "./context/ContextProvider";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-import useApi from "./createApi";
 
 const root = document.getElementById("root");
-
-// (async () => {
-//   const api = await useApi();
-//   ReactDOM.render(
-//     <React.StrictMode>
-//       <ContextProvider value={api}>
-//         <App />
-//       </ContextProvider>
-//     </React.StrictMode>,
-//     document.getElementById("root")
-//   );
-// })();
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,7 +13,7 @@ ReactDOM.render(
       <App />
     </ContextProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  root
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -3,33 +3,34 @@ import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
-const ShowForm = (nftData, handleChange, handleSubmit) => {
+
+const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
   return (
     <div>
       <div className="bid">
         <center>
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <p class="h5">
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <p className="h5">
                   <b>{nftData.title}</b> by <b>{nftData.artist}</b>
                   <br />
                 </p>
                 <br />
                 <img
-                  src={nftData.uri}
+                  src={process.env.PUBLIC_URL + `${nftData.image}`}
+                  alt={nftData.title}
                   style={{
-                    border: "1mm ridge",
-                    width: "200px",
-                    height: "300px",
+                    border: ".5mm ridge",
+                    height: "500px",
                   }}
                 />
                 <br />
                 <br />
-                <p class="h5">
+                <p className="h5">
                   <small>
                     <b>
-                      Current bid {nftData.topBid}&nbsp;
+                      Current bid {showCorrectedBid(nftData.topBid,nftData.chain)}&nbsp;
                       {nftData.chain}
                     </b>
                     &nbsp; by {nftData.topBidder}
@@ -41,9 +42,9 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
             </div>
             <br />
             <br />
-            <div class="row">
-              <div class="col-5">Your Bid:</div>
-              <div class="col-3 text-right" style={{ color: "#000000" }}>
+            <div className="row">
+              <div className="col-5">Your Bid:</div>
+              <div className="col-3 text-right" style={{ color: "#000000" }}>
                 <input
                   type="text"
                   className="form-control form-control-sm"
@@ -52,7 +53,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
                   required
                 />
               </div>
-              <div class="col-2 text-left">{nftData.chain}</div>
+              <div className="col-2 text-left">{nftData.chain}</div>
             </div>
           </div>
         </center>
@@ -76,7 +77,7 @@ const ShowForm = (nftData, handleChange, handleSubmit) => {
 };
 
 export default function Bid(props) {
-  const { email, nickName, nftData, bidItem } = useContext(AppContext);
+  const { email, nickName, nftData, bidItem, toHoonCrypto, toDisplayCrypto } = useContext(AppContext);
 
   const piece = nftData[props.id];
 
@@ -90,7 +91,7 @@ export default function Bid(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const sendBidToUrbit = () => {
-      bidItem({'email': email[0], 'exhibit-id': nftData[props.id].id, 'bid-amt': parseInt(state.newBid)});
+      bidItem({'email': email[0], 'exhibit-id': nftData[props.id].id, 'bid-amt': parseInt(toHoonCrypto(state.newBid, nftData[props.id].chain))});
     };
 
     bidItem();
@@ -98,7 +99,7 @@ export default function Bid(props) {
     // Check to see if new bid is higher than current bid
     if (state === undefined) {
       window.alert("Please enter a bid.");
-    } else if (state.newBid > piece.topBid) {
+    } else if (toHoonCrypto(state.newBid, nftData[props.id].chain) > piece.topBid) {
       sendBidToUrbit();
       setShow(false);
       window.alert("Congratulations you are currently the highest bidder!");
@@ -107,6 +108,9 @@ export default function Bid(props) {
     }
   };
 
+  const showCorrectedBid = (b, c) => {
+    return toDisplayCrypto(b, c);
+  }
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -121,15 +125,15 @@ export default function Bid(props) {
             {!localStorage.getItem("nickNameInLocalStorage") ? (
               "Login"
             ) : (
-              <div class="container">
-                <div class="row">
-                  <div class="col-6">
-                    <p class="h4">{nickName}</p>
-                    {/* <p class="h4">{nftData[props.id - 1].title}</p> */}
+              <div className="container">
+                <div className="row">
+                  <div className="col-6">
+                    <p className="h4">{nickName}</p>
+                    {/* <p className="h4">{nftData[props.id - 1].title}</p> */}
                   </div>
-                  <div class="col-3" style={{ color: "#8B8B8B" }}>
-                    <small class="h6">({email})</small>
-                    {/* <p class="h6">{nftData[props.id - 1].artist}</p> */}
+                  <div className="col-3" style={{ color: "#8B8B8B" }}>
+                    <small className="h6">({email})</small>
+                    {/* <p className="h6">{nftData[props.id - 1].artist}</p> */}
                   </div>
                 </div>
               </div>
@@ -138,7 +142,7 @@ export default function Bid(props) {
         </Modal.Header>
         <Modal.Body>
           {email[0].includes("@") ? (
-            ShowForm(piece, handleChange, handleSubmit)
+            ShowForm(piece, handleChange, handleSubmit, showCorrectedBid)
           ) : (
             <EmailForm />
           )}
