@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import AppContext from "../context";
+import "../App.css";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
@@ -131,13 +132,13 @@ export default function Bid(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="secondary" onClick={handleShow}>
         Bid
       </Button>
       <Modal
         show={show}
         onHide={handleClose}
-        dialogClassName="modal-90w"
+        dialogClassName="my-modal"
         aria-labelledby="example-custom-modal-styling-title"
       >
         <Modal.Header closeButton>
