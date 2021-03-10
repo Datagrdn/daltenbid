@@ -86,7 +86,6 @@ export default function Bid(props) {
     toDisplayCrypto,
   } = useContext(AppContext);
 
-  console.log(props.id);
   const piece = nftData[props.id];
 
   const [show, setShow] = useState(false);

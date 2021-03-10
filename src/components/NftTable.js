@@ -37,81 +37,83 @@ export default function NftTable(props) {
                           height: "300px",
                         }}
                       />
-                      <table style={{ width: "300px" }}>
-                        <thead>
-                          <tr>
-                            <th
-                              className="text-left"
-                              style={{ color: "#8B8B8B" }}
-                            >
-                              Title:
-                            </th>
-                            <th style={{ color: "#000000" }}>{nft.title}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th
-                              className="text-left"
-                              style={{ color: "#8B8B8B" }}
-                            >
-                              Artist:
-                            </th>
-                            <td>
-                              <a
-                                href={nft.uri}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                // style={{ color: "#55FF55" }}
+                      <center>
+                        <table style={{ width: "300px" }}>
+                          <thead>
+                            <tr>
+                              <th
+                                className="text-left"
+                                style={{ color: "#8B8B8B" }}
                               >
-                                {nft.artist}
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th
-                              className="text-left"
-                              style={{ color: "#8B8B8B" }}
-                            >
-                              Top Bid:
-                            </th>
-                            <th style={{ color: "#000000" }}>
-                              {toDisplayCrypto(nft.topBid, nft.chain)}{" "}
-                              {nft.chain}
-                            </th>
-                          </tr>
-                          <tr>
-                            <th
-                              className="text-left"
-                              style={{ color: "#8B8B8B" }}
-                            >
-                              Top Bidder:
-                            </th>
-                            <th style={{ color: "#000000" }}>
-                              {nft.topBidder}
-                            </th>
-                          </tr>
-                          <tr>
-                            <th
-                              className="text-left"
-                              style={{ color: "#8B8B8B" }}
-                            >
-                              Find Out More:
-                            </th>
-                            <td>
-                              <a
-                                href={nft.uri}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                // style={{ color: "#55FF55" }}
+                                Title:
+                              </th>
+                              <th style={{ color: "#000000" }}>{nft.title}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th
+                                className="text-left"
+                                style={{ color: "#8B8B8B" }}
                               >
-                                Here
-                              </a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <Bid id={nft.id} />
+                                Artist:
+                              </th>
+                              <td>
+                                <a
+                                  href={nft.uri}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  // style={{ color: "#55FF55" }}
+                                >
+                                  {nft.artist}
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th
+                                className="text-left"
+                                style={{ color: "#8B8B8B" }}
+                              >
+                                Top Bid:
+                              </th>
+                              <th style={{ color: "#000000" }}>
+                                {toDisplayCrypto(nft.topBid, nft.chain)}{" "}
+                                {nft.chain}
+                              </th>
+                            </tr>
+                            <tr>
+                              <th
+                                className="text-left"
+                                style={{ color: "#8B8B8B" }}
+                              >
+                                Top Bidder:
+                              </th>
+                              <th style={{ color: "#000000" }}>
+                                {nft.topBidder}
+                              </th>
+                            </tr>
+                            <tr>
+                              <th
+                                className="text-left"
+                                style={{ color: "#8B8B8B" }}
+                              >
+                                Find Out More:
+                              </th>
+                              <td>
+                                <a
+                                  href={nft.uri}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  // style={{ color: "#55FF55" }}
+                                >
+                                  Here
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <Bid id={nft.id} />
+                      </center>
                     </div>
                   );
                 })}
