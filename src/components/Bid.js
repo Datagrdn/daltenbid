@@ -3,7 +3,6 @@ import AppContext from "../context";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
-
 const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
   return (
     <div>
@@ -30,7 +29,8 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
                 <p className="h5">
                   <small>
                     <b>
-                      Current bid {showCorrectedBid(nftData.topBid,nftData.chain)}&nbsp;
+                      Current bid{" "}
+                      {showCorrectedBid(nftData.topBid, nftData.chain)}&nbsp;
                       {nftData.chain}
                     </b>
                     &nbsp; by {nftData.topBidder}
@@ -77,8 +77,16 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
 };
 
 export default function Bid(props) {
-  const { email, nickName, nftData, bidItem, toHoonCrypto, toDisplayCrypto } = useContext(AppContext);
+  const {
+    email,
+    nickName,
+    nftData,
+    bidItem,
+    toHoonCrypto,
+    toDisplayCrypto,
+  } = useContext(AppContext);
 
+  console.log(props.id);
   const piece = nftData[props.id];
 
   const [show, setShow] = useState(false);
@@ -91,7 +99,13 @@ export default function Bid(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const sendBidToUrbit = () => {
-      bidItem({'email': email[0], 'exhibit-id': nftData[props.id].id, 'bid-amt': parseInt(toHoonCrypto(state.newBid, nftData[props.id].chain))});
+      bidItem({
+        email: email[0],
+        "exhibit-id": nftData[props.id].id,
+        "bid-amt": parseInt(
+          toHoonCrypto(state.newBid, nftData[props.id].chain)
+        ),
+      });
     };
 
     bidItem();
@@ -99,7 +113,9 @@ export default function Bid(props) {
     // Check to see if new bid is higher than current bid
     if (state === undefined) {
       window.alert("Please enter a bid.");
-    } else if (toHoonCrypto(state.newBid, nftData[props.id].chain) > piece.topBid) {
+    } else if (
+      toHoonCrypto(state.newBid, nftData[props.id].chain) > piece.topBid
+    ) {
       sendBidToUrbit();
       setShow(false);
       window.alert("Congratulations you are currently the highest bidder!");
@@ -110,7 +126,7 @@ export default function Bid(props) {
 
   const showCorrectedBid = (b, c) => {
     return toDisplayCrypto(b, c);
-  }
+  };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -119,9 +135,14 @@ export default function Bid(props) {
       <Button variant="primary" onClick={handleShow}>
         Bid
       </Button>
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>
+          <Modal.Title id="example-custom-modal-styling-title">
             {!localStorage.getItem("nickNameInLocalStorage") ? (
               "Login"
             ) : (
@@ -129,11 +150,9 @@ export default function Bid(props) {
                 <div className="row">
                   <div className="col-6">
                     <p className="h4">{nickName}</p>
-                    {/* <p className="h4">{nftData[props.id - 1].title}</p> */}
                   </div>
                   <div className="col-3" style={{ color: "#8B8B8B" }}>
                     <small className="h6">({email})</small>
-                    {/* <p className="h6">{nftData[props.id - 1].artist}</p> */}
                   </div>
                 </div>
               </div>

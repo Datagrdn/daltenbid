@@ -3,13 +3,16 @@ import AppContext from "../context";
 import Bid from "./Bid";
 
 export default function NftTable(props) {
-  let { nftData, selectedArtistObject, toDisplayCrypto } = useContext(AppContext);
+  let { nftData, selectedArtistObject, toDisplayCrypto } = useContext(
+    AppContext
+  );
   const [selectedArtist] = selectedArtistObject;
 
   if (selectedArtist !== "all") {
     nftData = nftData.filter((nft) => nft.artist === selectedArtist);
   }
 
+  nftData = nftData.sort((a, b) => a.id - b.id);
   console.log(nftData);
 
   return (
@@ -73,7 +76,8 @@ export default function NftTable(props) {
                               Top Bid:
                             </th>
                             <th style={{ color: "#000000" }}>
-                              {toDisplayCrypto(nft.topBid, nft.chain)} {nft.chain}
+                              {toDisplayCrypto(nft.topBid, nft.chain)}{" "}
+                              {nft.chain}
                             </th>
                           </tr>
                           <tr>
@@ -95,7 +99,7 @@ export default function NftTable(props) {
                               Find Out More:
                             </th>
                             <td>
-                            <a
+                              <a
                                 href={nft.uri}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -107,7 +111,7 @@ export default function NftTable(props) {
                           </tr>
                         </tbody>
                       </table>
-                      <Bid id={index} />
+                      <Bid id={nft.id} />
                     </div>
                   );
                 })}
