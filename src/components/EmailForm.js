@@ -26,7 +26,7 @@ export default function EmailForm() {
       setNickName(state.nickName);
       localStorage.setItem("emailInLocalStorage", state.email);
       localStorage.setItem("nickNameInLocalStorage", state.nickName);
-      addBidder({'email': state.email, 'nick': state.nickName})
+      addBidder({ email: state.email, nick: state.nickName });
     } else {
       window.alert("Please enter valid e-mail and nickname");
     }
@@ -61,7 +61,9 @@ export default function EmailForm() {
         />
         <br />
         <br />
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit} variant="secondary">
+          Submit
+        </Button>
       </form>
     );
   };
@@ -76,7 +78,9 @@ export default function EmailForm() {
       <br />
       <br />
       <br />
-      <Button onClick={clearStorage}>Edit</Button>
+      <Button onClick={clearStorage} variant="secondary">
+        Edit
+      </Button>
     </p>
   );
 }

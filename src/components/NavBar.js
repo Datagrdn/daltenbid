@@ -44,7 +44,7 @@ export default function NavBar() {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item dropdown">
             <Dropdown>
-              <Dropdown.Toggle id="dropdown-basic">
+              <Dropdown.Toggle id="dropdown-basic" variant="secondary">
                 {selectedArtist === "all" ? "Artists" : selectedArtist}
               </Dropdown.Toggle>
 
@@ -53,7 +53,10 @@ export default function NavBar() {
                   All
                 </Dropdown.Item>
                 {artists.map((artist) => (
-                  <Dropdown.Item key={`artist-${artist}`} onClick={() => selectArtist(artist)}>
+                  <Dropdown.Item
+                    key={`artist-${artist}`}
+                    onClick={() => selectArtist(artist)}
+                  >
                     {artist}
                   </Dropdown.Item>
                 ))}
@@ -62,9 +65,9 @@ export default function NavBar() {
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0">
-          <Button variant="primary" onClick={handleShow}>
+          <Button variant="secondary" onClick={handleShow}>
             {!localStorage.getItem("nickNameInLocalStorage")
-              ? "Login"
+              ? "Register"
               : localStorage.getItem("nickNameInLocalStorage")}
           </Button>
 
