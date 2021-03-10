@@ -44,7 +44,7 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
             <br />
             <br />
             <div className="row">
-              <div className="col-5">Your Bid:</div>
+              <div className="col-5 text-right">Your Bid:</div>
               <div className="col-3 text-right" style={{ color: "#000000" }}>
                 <input
                   type="text"
@@ -59,19 +59,21 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
           </div>
         </center>
         <br />
-        <table style={{ width: "100%" }}>
-          <tr>
-            <center>
-              <Button
-                type="submit"
-                className="btn btn-primary btn-sm btn-block"
-                onClick={handleSubmit}
-              >
-                Place Bid
-              </Button>
-            </center>
-          </tr>
-        </table>
+        {/* <center>
+          <table>
+            <tr>
+              <center>
+                <Button
+                  type="submit"
+                  className="btn btn-primary btn-sm btn-block"
+                  onClick={handleSubmit}
+                >
+                  Place Bid
+                </Button>
+              </center>
+            </tr>
+          </table>
+        </center> */}
       </div>
     </div>
   );
@@ -166,14 +168,21 @@ export default function Bid(props) {
             <EmailForm />
           )}
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer>
+          {/* <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes
+          </Button> */}
+          <Button
+            type="submit"
+            className="btn btn-primary btn-lg"
+            onClick={handleSubmit}
+          >
+            Place Bid
           </Button>
-        </Modal.Footer> */}
+        </Modal.Footer>
       </Modal>
     </>
   );
