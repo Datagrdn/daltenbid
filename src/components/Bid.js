@@ -176,6 +176,7 @@ export default function Bid(props) {
             Save Changes
           </Button> */}
           <Button
+            variant="secondary"
             type="submit"
             className="btn btn-primary btn-lg"
             onClick={handleSubmit}
