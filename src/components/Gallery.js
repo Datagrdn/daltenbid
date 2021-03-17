@@ -2,12 +2,12 @@ import React from "react";
 import NftTable from "./NftTable";
 import NavBar from "./NavBar";
 
-function Gallery(props) {
+function Gallery() {
   return (
     <div className="Main">
       <div className="container-fluid mt-5">
         <NavBar />
-        <NftTable api={props.api} />
+        <NftTable />
       </div>
     </div>
   );

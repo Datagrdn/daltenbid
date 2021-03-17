@@ -4,7 +4,7 @@ import "../App.css";
 import EmailForm from "./EmailForm";
 import { Button, Modal } from "react-bootstrap";
 
-const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
+const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid, currency, currencytxt) => {
   return (
     <div>
       <div className="bid">
@@ -32,7 +32,7 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
                     <b>
                       Current bid{" "}
                       {showCorrectedBid(nftData.topBid, nftData.chain)}&nbsp;
-                      {nftData.chain}
+                      <img src={currency(nftData.chain)} title={currencytxt(nftData.chain)} alt={currencytxt(nftData.chain)} height="30px"/>
                     </b>
                     &nbsp; by {nftData.topBidder}
                   </small>
@@ -51,10 +51,11 @@ const ShowForm = (nftData, handleChange, handleSubmit, showCorrectedBid) => {
                   className="form-control form-control-sm"
                   placeholder="Amount"
                   onChange={handleChange}
+                  pattern="^\d*(\.\d{0,1})?$"
                   required
                 />
               </div>
-              <div className="col-2 text-left">{nftData.chain}</div>
+              <img src={currency(nftData.chain)} title={currencytxt(nftData.chain)} alt={currencytxt(nftData.chain)} height="30px"/>
             </div>
           </div>
         </center>
@@ -98,31 +99,47 @@ export default function Bid(props) {
     setState({ newBid: e.target.value, newBidder: nickName });
   };
 
+  const currency = (cur) =>  {
+    if (cur === 'eth') {
+      return "https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_703c7cfc78f85bf307c3b5be61414552/ethereum.png";
+    } else if (cur === 'raven') {
+      return "https://pbs.twimg.com/profile_images/1333592450670211075/_NK4JX_e_400x400.jpg";
+    }
+  } 
+
+  const currencytxt = (cur) =>  {
+    if (cur === 'eth') {
+      return "ethereum";
+    } else if (cur === 'raven') {
+      return "raven";
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const sendBidToUrbit = () => {
       bidItem({
         email: email[0],
         "exhibit-id": nftData[props.id].id,
-        "bid-amt": parseInt(
-          toHoonCrypto(state.newBid, nftData[props.id].chain)
-        ),
+        "bid-amt": toHoonCrypto(state.newBid, nftData[props.id].chain)
       });
     };
-
     bidItem();
 
     // Check to see if new bid is higher than current bid
-    if (state === undefined) {
+    var validator = new RegExp(/^\d+(?:\.\d{0,4})?$/)
+    if (!validator.test(state.newBid)) {
+      window.alert("Please keep your bid to under 4 decimal places");
+    } else if (state === undefined) {
       window.alert("Please enter a bid.");
     } else if (
-      toHoonCrypto(state.newBid, nftData[props.id].chain) > piece.topBid
+      toHoonCrypto(state.newBid, nftData[props.id].chain) > (piece.topBid + (piece.topBid*.02)).toFixed(4)
     ) {
       sendBidToUrbit();
       setShow(false);
       window.alert("Congratulations you are currently the highest bidder!");
     } else {
-      window.alert(`Bid must be greater than ${piece.topBid} ${piece.chain}.`);
+      window.alert(`Bid must be greater than ${toDisplayCrypto((piece.topBid + (piece.topBid*.02)).toFixed(4), piece.chain)} ${piece.chain}.`);
     }
   };
 
@@ -163,7 +180,7 @@ export default function Bid(props) {
         </Modal.Header>
         <Modal.Body>
           {email[0].includes("@") ? (
-            ShowForm(piece, handleChange, handleSubmit, showCorrectedBid)
+            ShowForm(piece, handleChange, handleSubmit, showCorrectedBid, currency, currencytxt)
           ) : (
             <EmailForm />
           )}

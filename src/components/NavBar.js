@@ -16,6 +16,14 @@ export default function NavBar() {
     setSelectedArtist(artist);
   };
 
+  const whatLink = () => {
+    if (selectedArtist === "~dashus-navnul") {return "https://meet.jit.si/dashusnavnulGrimoiredaltenauction";};
+    if (selectedArtist === "~tocrex-holpen") {return "https://meet.jit.si/tocrexholpenGalaxyGirlsdaltenauction"};
+    if (selectedArtist === "~minder-folden") {return "https://meet.jit.si/minderfoldenMindFolderdaltenauction"};
+    if (selectedArtist === "~naltyc-wornes") {return "https://meet.jit.si/naltycwornesSmolArtsdaltenauction"};
+    return "https://meet.jit.si/daltenCollectionAuctionMainHouseChat";
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="https://dalten.org">
@@ -62,6 +70,10 @@ export default function NavBar() {
                 ))}
               </Dropdown.Menu>
             </Dropdown>
+          </li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+          <li className="navbar-brand">
+            <strong><a href={whatLink()} target="blank" style={{ color: 'rgb(100, 109, 116)', textDecoration: 'underline' }}>Join the Conversation (hosted on Jitsi)</a></strong>
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0">

@@ -52,10 +52,10 @@ const ContextProvider = ({ children }) => {
     let inc = new BigNumber(val);
     if (cur === "eth") {
       let conFact = new BigNumber(1e18);
-      return inc.dividedBy(conFact).toFixed(8);
+      return inc.dividedBy(conFact).toFixed(4);
     } else {
       let conFact = new BigNumber(1e8);
-      return inc.dividedBy(conFact).toFixed(8);
+      return inc.dividedBy(conFact).toFixed(4);
     }
   };
 
@@ -81,7 +81,7 @@ const ContextProvider = ({ children }) => {
       urb.poke({
         app: "daltenauction",
         mark: "daltenauction-action",
-        json: { "bid-item": pokeArgs },
+        json: { "bid-item-json": pokeArgs },
       });
     },
     [urb]

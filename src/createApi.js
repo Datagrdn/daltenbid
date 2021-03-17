@@ -3,9 +3,9 @@ import { memoize } from "lodash";
 
 const createApi = memoize(async () => {
   const urb = await Urbit.authenticate({
-    ship: "zod",
-    url: "localhost:8080",
-    code: "lidlut-tabwed-pillex-ridrup",
+    ship: "dalten",
+    url: "138.197.192.56",
+    code: "migfur-riphut-pagdev-mirrus",
     verbose: true,
   });
   return urb;
