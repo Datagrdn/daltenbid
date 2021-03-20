@@ -21,7 +21,7 @@ export default function NavBar() {
     if (selectedArtist === "~tocrex-holpen") {return "https://meet.jit.si/tocrexholpenGalaxyGirlsdaltenauction"};
     if (selectedArtist === "~minder-folden") {return "https://meet.jit.si/minderfoldenMindFolderdaltenauction"};
     if (selectedArtist === "~naltyc-wornes") {return "https://meet.jit.si/naltycwornesSmolArtsdaltenauction"};
-    return "https://meet.jit.si/daltenCollectionAuctionMainHouseChat";
+    return "https://meet.jit.si/DaltenCollectionDebut";
   };
 
   return (

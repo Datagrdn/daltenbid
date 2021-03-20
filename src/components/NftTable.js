@@ -123,6 +123,52 @@ export default function NftTable(props) {
           </main>
         </div>
       </div>
+      <br/>
+      <br/>
+    <center><table>
+      <tr>
+        <td colspan="4" style={{ color: 'rgb(100, 109, 116)', fontSize: '30px', textAlign: 'center'}}>Items donated to the ~dalten Collection</td>
+      </tr>
+      <tr>
+        <td colspan="4" style={{ color: 'red', fontSize: '15px', textAlign: 'center'}}>not for sale</td>
+      </tr>
+      <tr>
+        <td style={{ width: "350px" }}>
+          <center>~dashus-navnul</center>
+        </td>
+        <td style={{ width: "350px" }}>
+          <center>~naltyc-wornes</center>
+        </td>
+        <td style={{ width: "350px" }}>
+          <center>~minder-folden</center>
+        </td>
+        <td style={{ width: "350px" }}>
+          <center>~tocrex-holpen</center>
+        </td>
+      </tr>
+      <tr>
+        <td><center>
+        ~dashus-navnul's Grimoire 8
+          <br></br>
+          <img style={{ width: "250px" }} src="https://lh3.googleusercontent.com/IYkbhjuUl3vCNzrgy9xJrDc9YDMJ2q8WnxvWw9_nlSPLQIDy0aohZrKW58AKxmVGbN6GgwzFTAjcvBlDlQ8MAz2w_8vSwAf5D6He=s0" />
+        </center></td>
+        <td><center>
+        Memories of Futures Past:
+          <br></br>
+          <img style={{ width: "300px" }} src="https://www.nvrmor.io/wp-content/uploads/2021/03/Memories-Of-Futures-Past-Preview.jpg" />
+        </center></td>
+        <td><center>
+        HighTimes
+          <br></br>
+          <img style={{ width: "300px" }} src="https://ravencoin.asset-explorer.net/ipfs/QmXuetVettUDVddL43JFS9HCx4zu2vtu6aDERCaev3UbFR" />
+        </center></td>
+        <td><center>
+        One of each of the Galaxy Girls:
+          <br></br>
+          <img style={{ width: "300px" }} src="https://lh3.googleusercontent.com/btNsA7EhW5UgiYRzvL44tka1PgBuIi-pV-5BfN63M-AHH1ooVMgPyxdAT4tOcB4JcGPWgvVaVAj5KAlvlgQwqahGXRcpM13Uc-1UVQ" />
+        </center></td>
+      </tr>
+    </table></center>
     </div>
   );
 }
